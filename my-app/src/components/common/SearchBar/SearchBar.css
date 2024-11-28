@@ -1,23 +1,36 @@
 .search-bar {
-    display: flex;
-    align-items: center;
-    width: 381px;
-    height: 32px;
-    padding-right: 4px;
-    flex-shrink: 0;
-  }
-  
-  .search-bar input {
-    background-color: #000000;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    opacity: 0.4979;
-  }
-  
-  .search-bar svg {
-    margin-right: 24px; /* 돋보기 아이콘을 24px 만큼 왼쪽에 배치 */
-  }
-  
+  display: flex;
+  align-items: center;
+  gap: 16px; /* 아이콘과 입력창 사이 간격 */
+  padding: 8px; /* 검색창 전체 패딩 */
+  border-radius: 8px;
+}
+
+.search-bar svg {
+  flex-shrink: 0;
+}
+
+.search-bar input {
+  flex: 1; /* 입력창이 가능한 모든 공간 차지 */
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--Pure-White, #FFF);
+  font-family: Outfit, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  font-feature-settings: 'liga' off, 'clig' off;
+}
+
+.search-bar input::placeholder {
+  color: var(--Gray, #8C8C8C); /* 플레이스홀더 색상 */
+}
+
+.search-bar .divider-bar {
+  width: 2px;
+  height: 31px;
+  background: var(--Red, #FC4747);
+  flex-shrink: 0;
+}

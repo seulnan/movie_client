@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Recommended.css';
 
 // 이미지 경로 가져오기
@@ -27,6 +27,10 @@ import Recommend22 from '../../../assets/Recommend22.png';
 import Recommend23 from '../../../assets/Recommend23.png';
 import Recommend24 from '../../../assets/Recommend24.png';
 
+import bookmarkDefault from '../../../assets/BookMark.svg';
+import bookmarkHover from '../../../assets/BookMarkhover.svg';
+import bookmarkClick from '../../../assets/BookMarkClick.svg';
+
 const images = [
   Recommend1, Recommend2, Recommend3, Recommend4, Recommend5, Recommend6,
   Recommend7, Recommend8, Recommend9, Recommend10, Recommend11, Recommend12,
@@ -35,13 +39,44 @@ const images = [
 ];
 
 const Recommended = () => {
+  const [bookmarks, setBookmarks] = useState(Array(24).fill(false)); // 북마크 상태
+
+  const handleBookmarkClick = (index) => {
+    setBookmarks((prev) =>
+      prev.map((state, i) => (i === index ? !state : state))
+    );
+  };
+
   return (
     <div className="recommended">
       <h2>Recommended for You</h2>
       <div className="grid">
         {images.map((image, index) => (
           <div className="grid-item" key={index}>
+            {/* 컨텐츠 이미지 */}
             <img src={image} alt={`Recommended ${index + 1}`} />
+
+            {/* 북마크 아이콘 */}
+            <img
+              className="bookmark-icon"
+              src={bookmarks[index] ? bookmarkClick : bookmarkDefault}
+              alt="Bookmark"
+              onMouseEnter={(e) => (e.target.src = bookmarkHover)}
+              onMouseLeave={(e) =>
+                (e.target.src = bookmarks[index] ? bookmarkClick : bookmarkDefault)
+              }
+              onClick={() => handleBookmarkClick(index)}
+            />
+
+            {/* 컨텐츠 정보 */}
+            <div className="content-info">
+              <span>2019</span>
+              <span>Movies</span>
+              <span>E</span>
+            </div>
+
+            {/* 컨텐츠 제목 */}
+            <div className="content-title">Content Title {index + 1}</div>
           </div>
         ))}
       </div>
