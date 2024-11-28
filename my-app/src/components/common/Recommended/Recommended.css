@@ -1,19 +1,25 @@
 .recommended {
-    margin-bottom: 20px;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-  }
-  
-  .grid-item {
-    background-color: #444;
-    height: 200px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.grid-item {
+  background-color: #444;
+  height: 200px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* 이미지를 넘치지 않게 처리 */
+}
+
+.grid-item img {
+  width: 100%; /* 이미지가 박스에 꽉 차게 */
+  height: 100%; /* 세로 방향도 박스에 꽉 차게 */
+  object-fit: cover; /* 이미지 비율 유지하면서 박스에 맞게 조정 */
+}
