@@ -8,8 +8,8 @@ const Sidebar = () => {
       <div className="new-icon">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="33"
-          height="26"
+          width="28"
+          height="20"
           viewBox="0 0 33 26"
           fill="none"
         >
@@ -25,7 +25,7 @@ const Sidebar = () => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
-          height="200"
+          height="170"
           viewBox="0 0 20 200"
           fill="none"
         >
