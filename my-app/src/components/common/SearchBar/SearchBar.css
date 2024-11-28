@@ -1,12 +1,23 @@
 .search-bar {
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    width: 381px;
+    height: 32px;
+    padding-right: 4px;
+    flex-shrink: 0;
   }
   
   .search-bar input {
+    background-color: #000000;
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
+    opacity: 0.4979;
+  }
+  
+  .search-bar svg {
+    margin-right: 24px; /* 돋보기 아이콘을 24px 만큼 왼쪽에 배치 */
   }
   
