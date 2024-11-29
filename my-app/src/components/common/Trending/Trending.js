@@ -41,7 +41,7 @@ const Trending = () => {
             <div className="card" key={index}>
               {/* 이미지와 제목 렌더링 */}
               <img
-                src={item.thumbnail.regularLarge} // `thumbnail` 객체의 `regularLarge` 속성 접근
+                src={item.thumbnailUrl.trendingLarge} // `thumbnail` 객체의 `regularLarge` 속성 접근
                 alt={item.title}
                 style={{ width: '100%', height: '100%', borderRadius: '10px' }}
               />
