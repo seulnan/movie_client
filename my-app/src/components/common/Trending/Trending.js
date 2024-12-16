@@ -37,15 +37,21 @@ const Trending = () => {
         {trendingData.length === 0 ? (
           <p>Loading...</p> // 데이터가 로딩 중일 때 메시지 표시
         ) : (
-          trendingData.map((item, index) => (
-            <div className="card" key={index}>
-              {/* 이미지와 제목 렌더링 */}
+          trendingData.map((item) => (
+            <div className="card" key={item._id}>
+              {/* 이미지 */}
               <img
-                src={item.thumbnail.regularLarge} // `thumbnail` 객체의 `regularLarge` 속성 접근
+                src={item.thumbnailUrl.trendingLarge}
                 alt={item.title}
-                style={{ width: '100%', height: '100%', borderRadius: '10px' }}
+                className="card-image"
               />
-              <p>{item.title}</p> {/* 제목 렌더링 */}
+              {/* 영화 정보 */}
+              <div className="card-info">
+                <p className="movie-info">
+                  {item.year} • {item.category} • {item.rating}
+                </p>
+                <h3 className="movie-title">{item.title}</h3>
+              </div>
             </div>
           ))
         )}

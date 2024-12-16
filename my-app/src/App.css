@@ -1,3 +1,4 @@
+/* App.css 수정 */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -15,4 +16,7 @@ body {
   flex: 1;
   padding: 36px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px; /* 섹션 간 간격 */
 }

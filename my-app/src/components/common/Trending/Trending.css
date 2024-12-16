@@ -28,20 +28,37 @@
 }
 
 .card {
+  position: relative; /* 제목과 정보 위치를 위해 상대적 포지션 사용 */
   min-width: 470px;
   height: 230px;
   background-color: #444;
   border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 18px;
-  overflow: hidden;  /* 이미지가 카드 밖으로 넘치지 않도록 */
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .card img {
-  object-fit: cover;  /* 이미지가 카드 크기에 맞게 잘라서 표시 */
   width: 100%;
   height: 100%;
+  object-fit: cover; /* 이미지가 카드에 꽉 차게 */
+}
+
+
+.card-info {
+  position: absolute;
+  bottom: 20px; /* 카드 하단에 배치 */
+  left: 20px; /* 왼쪽에서 20px 띄움 */
+  color: #fff;
+}
+
+.card-info p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.card-info h3 {
+  margin: 5px 0 0 0; /* 제목과 위 요소 간격 조정 */
+  font-size: 18px;
+  font-weight: bold;
 }
