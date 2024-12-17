@@ -8,8 +8,9 @@
 
 .movie-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(4, 1fr); /* 열을 4개로 설정 */
+  grid-template-rows: repeat(6, auto); /* 행을 6개로 설정 */
+  gap: 20px; /* 카드 간 간격 설정 */
 }
 
 .movie-item {
@@ -36,4 +37,10 @@
 .movie-item p {
   margin: 5px 10px;
   color: #fff;
+}
+
+/* 부모 컨테이너 강제 적용 */
+.content .recommended {
+  display: grid; /* 부모 flex 영향 방지 */
+  grid-template-rows: auto;
 }
