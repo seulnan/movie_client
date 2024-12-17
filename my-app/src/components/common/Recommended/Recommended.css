@@ -14,9 +14,9 @@
 }
 
 .movie-item {
+  position: relative;
   display: flex;
   flex-direction: column;
-  background-color: #333;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -33,10 +33,23 @@
   object-fit: cover;
 }
 
-.movie-item h3,
-.movie-item p {
-  margin: 5px 10px;
+.movie-info {
+  padding: 10px; /* 제목과 정보 패딩 */
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* 정보 간격 */
+}
+
+.movie-info p,
+.movie-info h3 {
+  margin: 0;
   color: #fff;
+  font-size: 14px;
+}
+
+.movie-info p {
+  font-weight: 300;
+  opacity: 0.8; /* 연한 텍스트 스타일 */
 }
 
 /* 부모 컨테이너 강제 적용 */

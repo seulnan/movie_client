@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Recommended.css';
 
 const Recommended = () => {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
 
   useEffect(() => {
-    // API 호출
     const fetchRecommendedMovies = async () => {
       try {
         const response = await axios.get('http://localhost:5001/api/works/recommend');
@@ -19,7 +19,7 @@ const Recommended = () => {
   }, []);
 
   return (
-    <div>
+    <div className="recommended">
       <h2>Recommended Movies</h2>
       <div className="movie-list">
         {recommendedMovies.map((movie) => (
@@ -29,9 +29,10 @@ const Recommended = () => {
               alt={movie.title}
               className="movie-thumbnail"
             />
-            <h3>{movie.title}</h3>
-            <p>{movie.year}</p>
-            <p>{movie.rating}</p>
+            <div className="movie-info">
+              <p>{movie.year} • {movie.category} • {movie.rating}</p>
+              <h3>{movie.title}</h3>
+            </div>
           </div>
         ))}
       </div>
