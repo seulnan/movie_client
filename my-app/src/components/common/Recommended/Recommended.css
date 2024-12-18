@@ -4,13 +4,14 @@
 
 .recommended h2 {
   margin-bottom: 20px;
+  color: #fff; /* 제목 색상 */
 }
 
 .movie-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 열을 4개로 설정 */
   grid-template-rows: repeat(6, auto); /* 행을 6개로 설정 */
-  gap: 20px; /* 카드 간 간격 설정 */
+  gap: 20px; /* 카드 간 간격 */
 }
 
 .movie-item {
@@ -34,10 +35,10 @@
 }
 
 .movie-info {
-  padding: 10px; /* 제목과 정보 패딩 */
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 5px; /* 정보 간격 */
+  gap: 5px;
 }
 
 .movie-info p,
@@ -49,11 +50,23 @@
 
 .movie-info p {
   font-weight: 300;
-  opacity: 0.8; /* 연한 텍스트 스타일 */
+  opacity: 0.8;
 }
 
-/* 부모 컨테이너 강제 적용 */
-.content .recommended {
-  display: grid; /* 부모 flex 영향 방지 */
-  grid-template-rows: auto;
+/* 북마크 아이콘 스타일 */
+.bookmark-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmark-icon img {
+  width: 16px;
+  height: 16px;
 }

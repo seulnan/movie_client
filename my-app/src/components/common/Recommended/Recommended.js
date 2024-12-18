@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Recommended.css';
 
-const Recommended = () => {
+
+const Recommended = ({ handleBookmarkClick }) => {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const Recommended = () => {
 
   return (
     <div className="recommended">
-      <h2>Recommended Movies</h2>
+      <h2>Recommended for you</h2>
       <div className="movie-list">
         {recommendedMovies.map((movie) => (
           <div key={movie._id} className="movie-item">
@@ -32,6 +33,10 @@ const Recommended = () => {
             <div className="movie-info">
               <p>{movie.year} • {movie.category} • {movie.rating}</p>
               <h3>{movie.title}</h3>
+            </div>
+            {/* 북마크 아이콘 추가 */}
+            <div className="bookmark-icon" onClick={() => handleBookmarkClick(movie)}>
+              <img src={require('../../../assets/bookmark.svg')} alt="Bookmark" />
             </div>
           </div>
         ))}
