@@ -1,5 +1,5 @@
 import React from "react"; 
-import "./SearchBar.css";  // CSS 파일을 import
+import "./SearchBar.css";
 
 const SearchBar = () => {
   return (
@@ -11,7 +11,7 @@ const SearchBar = () => {
         viewBox="0 0 32 32"
         fill="none"
       >
-        <rect opacity="0.01" width="32" height="32" fill="black"/>
+        <rect opacity="0.01" width="32" height="32" fill="black" />
         <path
           fillRule="evenodd"
           clipRule="evenodd"

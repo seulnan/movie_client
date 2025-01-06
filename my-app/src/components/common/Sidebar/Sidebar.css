@@ -1,11 +1,3 @@
-body {
-  display: flex;
-  justify-content: flex-start; /* 수평으로 왼쪽 정렬 */
-  align-items: flex-start;    /* 수직으로 상단 정렬 */
-  margin: 0;                  /* 기본 margin 제거 */
-  height: 100vh;              /* 화면 전체 높이 사용 */
-}
-
 .sidebar {
   width: 90px;
   height: 680px;
@@ -14,14 +6,22 @@ body {
   align-items: center;
   border-radius: 20px;
   background: var(--Semi-Dark-Blue, #161D2F);
-  margin-top: 32px;   /* 상단에서 32px 떨어지게 */
-  margin-left: 32px;  /* 왼쪽에서 32px 떨어지게 */
+  margin-top: 32px;
+  margin-left: 32px;
 }
 
 .icon {
   margin-top: 64px;
 }
 
-.new-icon {
-  margin-top: 35px; /* 위로 75px 떨어진 위치 */
+.icon img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.icon:hover img {
+  opacity: 0.7;
+  transform: scale(1.1); /* 살짝 확대 효과 */
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
