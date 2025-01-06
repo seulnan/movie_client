@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import "./TVseries.css";
 import axios from 'axios';
 
 const TVseries = () => {

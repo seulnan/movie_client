@@ -10,13 +10,19 @@
   margin-left: 32px;
 }
 
+.red-icon img {
+  margin-top: 30px;
+  width: 28px;
+  height: 28px;
+}
+
 .icon {
   margin-top: 64px;
 }
 
 .icon img {
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 }
 
@@ -25,3 +31,4 @@
   transform: scale(1.1); /* 살짝 확대 효과 */
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
+

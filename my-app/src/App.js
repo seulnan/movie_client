@@ -6,7 +6,7 @@ import SearchBar from "./components/common/SearchBar/SearchBar";
 import Home from "./components/common/Home/Home";
 import Movies from "./components/common/Movies/Movies";
 import TVSeries from "./components/common/TVseries/TVseries";
-import Recommended from "./components/common/Recommended/Recommended";
+import Bookmarked from "./components/common/Bookmarked/Bookmarked";
 
 const App = () => {
   return (
@@ -49,13 +49,13 @@ const App = () => {
               }
             />
 
-            {/* Recommended (Bookmarks) */}
+            {/* Bookmarked Page */}
             <Route
-              path="/recommended"
+              path="/bookmarked"
               element={
                 <>
                   <SearchBar />
-                  <Recommended />
+                  <Bookmarked />
                 </>
               }
             />
