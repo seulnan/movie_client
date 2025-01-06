@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./TVseries.css";
-import axios from 'axios';
 
-const TVseries = () => {
+const TVseries = ({ handleBookmarkClick }) => {
   const [tvSeries, setTVSeries] = useState([]);
 
   useEffect(() => {
     const fetchTVSeries = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/works/TVseries');
+        const response = await axios.get(
+          "http://localhost:5001/api/works/tvseries"
+        );
         setTVSeries(response.data);
       } catch (error) {
-        console.error('Error fetching TV series:', error.message);
+        console.error("Error fetching TV series:", error.message);
       }
     };
 
@@ -19,29 +21,32 @@ const TVseries = () => {
   }, []);
 
   return (
-    <div>
-      <h1>TV Series</h1>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+    <div className="tvseries">
+      <h2>TV Series</h2>
+      <div className="movie-list">
         {tvSeries.map((series) => (
-          <div
-            key={series._id}
-            style={{
-              border: '1px solid #ccc',
-              borderRadius: '10px',
-              padding: '10px',
-              width: '200px',
-              textAlign: 'center',
-            }}
-          >
+          <div key={series._id} className="movie-item">
             <img
               src={series.thumbnailUrl.regularLarge}
               alt={series.title}
-              style={{ width: '100%', borderRadius: '10px' }}
+              className="movie-thumbnail"
             />
-            <h3>{series.title}</h3>
-            <p>Year: {series.year}</p>
-            <p>Rating: {series.rating}</p>
-            <p>Bookmarked: {series.isBookmarked ? 'Yes' : 'No'}</p>
+            <div className="movie-info">
+              <p>
+                {series.year} • {series.category} • {series.rating}
+              </p>
+              <h3>{series.title}</h3>
+            </div>
+            {/* 북마크 아이콘 추가 */}
+            <div
+              className="bookmark-icon"
+              onClick={() => handleBookmarkClick(series)}
+            >
+              <img
+                src={require("../../../assets/bookmark.svg")}
+                alt="Bookmark"
+              />
+            </div>
           </div>
         ))}
       </div>

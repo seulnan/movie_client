@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import "../TVseries/TVseries.css";
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./Movies.css";
 
-const Movies = () => {
+const Movies = ({ handleBookmarkClick }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/works/movies');
+        const response = await axios.get(
+          "http://localhost:5001/api/works/movies"
+        );
         setMovies(response.data);
       } catch (error) {
-        console.error('Error fetching movies:', error.message);
+        console.error("Error fetching movies:", error.message);
       }
     };
 
@@ -19,29 +21,32 @@ const Movies = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Movies</h1>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+    <div className="movies">
+      <h2>Movies</h2>
+      <div className="movie-list">
         {movies.map((movie) => (
-          <div
-            key={movie._id}
-            style={{
-              border: '1px solid #ccc',
-              borderRadius: '10px',
-              padding: '10px',
-              width: '200px',
-              textAlign: 'center',
-            }}
-          >
+          <div key={movie._id} className="movie-item">
             <img
               src={movie.thumbnailUrl.regularLarge}
               alt={movie.title}
-              style={{ width: '100%', borderRadius: '10px' }}
+              className="movie-thumbnail"
             />
-            <h3>{movie.title}</h3>
-            <p>Year: {movie.year}</p>
-            <p>Rating: {movie.rating}</p>
-            <p>Bookmarked: {movie.isBookmarked ? 'Yes' : 'No'}</p>
+            <div className="movie-info">
+              <p>
+                {movie.year} • {movie.category} • {movie.rating}
+              </p>
+              <h3>{movie.title}</h3>
+            </div>
+            {/* 북마크 아이콘 추가 */}
+            <div
+              className="bookmark-icon"
+              onClick={() => handleBookmarkClick(movie)}
+            >
+              <img
+                src={require("../../../assets/bookmark.svg")}
+                alt="Bookmark"
+              />
+            </div>
           </div>
         ))}
       </div>
