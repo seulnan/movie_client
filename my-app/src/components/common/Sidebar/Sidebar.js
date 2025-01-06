@@ -19,6 +19,12 @@ const Sidebar = () => {
   const [tvIcon, setTvIcon] = useState(TVIcon);
   const [bookmarkIcon, setBookmarkIcon] = useState(BookmarkIcon);
 
+  const [activeIcon, setActiveIcon] = useState(null); // 클릭한 아이콘 상태 관리
+
+  const handleIconClick = (iconName) => {
+    setActiveIcon(iconName); // 클릭한 아이콘 이름 저장
+  };
+
   return (
     <div className="sidebar">
       {/* 사이드바 맨 위에 Red.svg 추가 */}
@@ -32,32 +38,36 @@ const Sidebar = () => {
         className="icon"
         onMouseEnter={() => setHomeIcon(HomeHoverIcon)}
         onMouseLeave={() => setHomeIcon(HomeIcon)}
+        onClick={() => handleIconClick("home")}
       >
-        <img src={homeIcon} alt="Home Icon" />
+        <img src={activeIcon === "home" ? HomeHoverIcon : homeIcon} alt="Home Icon" />
       </NavLink>
       <NavLink
         to="/movies"
         className="icon"
         onMouseEnter={() => setMovieIcon(MovieHoverIcon)}
         onMouseLeave={() => setMovieIcon(MovieIcon)}
+        onClick={() => handleIconClick("movie")}
       >
-        <img src={movieIcon} alt="Movies Icon" />
+        <img src={activeIcon === "movie" ? MovieHoverIcon : movieIcon} alt="Movies Icon" />
       </NavLink>
       <NavLink
         to="/tvseries"
         className="icon"
         onMouseEnter={() => setTvIcon(TVHoverIcon)}
         onMouseLeave={() => setTvIcon(TVIcon)}
+        onClick={() => handleIconClick("tv")}
       >
-        <img src={tvIcon} alt="TVseries Icon" />
+        <img src={activeIcon === "tv" ? TVHoverIcon : tvIcon} alt="TVseries Icon" />
       </NavLink>
       <NavLink
         to="/bookmarked"
         className="icon"
         onMouseEnter={() => setBookmarkIcon(BookmarkHoverIcon)}
         onMouseLeave={() => setBookmarkIcon(BookmarkIcon)}
+        onClick={() => handleIconClick("bookmark")}
       >
-        <img src={bookmarkIcon} alt="Bookmarked Icon" />
+        <img src={activeIcon === "bookmark" ? BookmarkHoverIcon : bookmarkIcon} alt="Bookmarked Icon" />
       </NavLink>
     </div>
   );
