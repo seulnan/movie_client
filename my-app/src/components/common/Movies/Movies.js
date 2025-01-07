@@ -1,24 +1,31 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./Movies.css";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './Movies.css';
 
-const Movies = ({ handleBookmarkClick }) => {
+const Movies = () => {
   const [movies, setMovies] = useState([]);
+  const [bookmarkedMovies, setBookmarkedMovies] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5001/api/works/movies"
-        );
+        const response = await axios.get('http://localhost:5001/api/works/movies');
         setMovies(response.data);
       } catch (error) {
-        console.error("Error fetching movies:", error.message);
+        console.error('Error fetching movies:', error.message);
       }
     };
 
     fetchMovies();
   }, []);
+
+  const handleBookmarkClick = (movie) => {
+    if (bookmarkedMovies.some((m) => m._id === movie._id)) {
+      setBookmarkedMovies(bookmarkedMovies.filter((m) => m._id !== movie._id));
+    } else {
+      setBookmarkedMovies([...bookmarkedMovies, movie]);
+    }
+  };
 
   return (
     <div className="movies">
@@ -37,14 +44,10 @@ const Movies = ({ handleBookmarkClick }) => {
               </p>
               <h3>{movie.title}</h3>
             </div>
-            {/* 북마크 아이콘 추가 */}
-            <div
-              className="bookmark-icon"
-              onClick={() => handleBookmarkClick(movie)}
-            >
-              <img
-                src={require("../../../assets/bookmark.svg")}
-                alt="Bookmark"
+            <div className="bookmark-icon" onClick={() => handleBookmarkClick(movie)}>
+              <img 
+                src={require(`../../../assets/${bookmarkedMovies.some((m) => m._id === movie._id) ? 'bookmarkC.svg' : 'bookmark.svg'}`)} 
+                alt="Bookmark" 
               />
             </div>
           </div>

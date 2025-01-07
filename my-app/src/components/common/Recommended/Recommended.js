@@ -1,23 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './Recommended.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import bookmark from "../../../assets/bookmark.svg";
+import bookmarkH from "../../../assets/bookmarkH.svg";
+import bookmarkC from "../../../assets/bookmarkC.svg";
+import "./Recommended.css";
 
-
-const Recommended = ({ handleBookmarkClick }) => {
+const Recommended = () => {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
 
   useEffect(() => {
     const fetchRecommendedMovies = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/works/recommend');
+        const response = await axios.get(
+          "http://localhost:5001/api/works/recommend"
+        );
         setRecommendedMovies(response.data);
       } catch (error) {
-        console.error('Error fetching recommended movies:', error.message);
+        console.error("Error fetching recommended movies:", error.message);
       }
     };
 
     fetchRecommendedMovies();
   }, []);
+
+  const toggleBookmark = async (id) => {
+    try {
+      const response = await axios.patch(
+        `http://localhost:5001/api/works/${id}/bookmark`
+      );
+      const updatedBookmark = response.data.isBookmarked;
+
+      // Update movie list locally after bookmark toggle
+      setRecommendedMovies((prevMovies) =>
+        prevMovies.map((movie) =>
+          movie._id === id ? { ...movie, isBookmarked: updatedBookmark } : movie
+        )
+      );
+    } catch (error) {
+      console.error("Error toggling bookmark:", error.message);
+    }
+  };
 
   return (
     <div className="recommended">
@@ -31,12 +53,25 @@ const Recommended = ({ handleBookmarkClick }) => {
               className="movie-thumbnail"
             />
             <div className="movie-info">
-              <p>{movie.year} • {movie.category} • {movie.rating}</p>
+              <p>
+                {movie.year} • {movie.category} • {movie.rating}
+              </p>
               <h3>{movie.title}</h3>
             </div>
-            {/* 북마크 아이콘 추가 */}
-            <div className="bookmark-icon" onClick={() => handleBookmarkClick(movie)}>
-              <img src={require('../../../assets/bookmark.svg')} alt="Bookmark" />
+            <div
+              className="bookmark-icon"
+              onClick={() => toggleBookmark(movie._id)}
+            >
+              <img
+                src={movie.isBookmarked ? bookmarkC : bookmark}
+                alt="Bookmark"
+                onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
+                onMouseOut={(e) =>
+                  (e.currentTarget.src = movie.isBookmarked
+                    ? bookmarkC
+                    : bookmark)
+                }
+              />
             </div>
           </div>
         ))}

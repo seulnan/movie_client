@@ -1,26 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Trending.css';
 
-const Trending = ({ handleBookmarkClick }) => {
+const Trending = () => {
   const [trendingData, setTrendingData] = useState([]);
-
-  const fetchTrendingData = async () => {
-    try {
-      const response = await axios.get('http://localhost:5001/api/works/trending');
-      if (Array.isArray(response.data)) {
-        setTrendingData(response.data);
-      } else {
-        console.error('Invalid response format');
-      }
-    } catch (error) {
-      console.error('Error fetching trending data:', error.message);
-    }
-  };
+  const [bookmarkedMovies, setBookmarkedMovies] = useState([]);
 
   useEffect(() => {
+    const fetchTrendingData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5001/api/works/trending');
+        setTrendingData(response.data);
+      } catch (error) {
+        console.error('Error fetching trending data:', error.message);
+      }
+    };
+
     fetchTrendingData();
   }, []);
+
+  const handleBookmarkClick = (movie) => {
+    if (bookmarkedMovies.some((m) => m._id === movie._id)) {
+      setBookmarkedMovies(bookmarkedMovies.filter((m) => m._id !== movie._id));
+    } else {
+      setBookmarkedMovies([...bookmarkedMovies, movie]);
+    }
+  };
 
   return (
     <div className="trending">
@@ -39,9 +44,11 @@ const Trending = ({ handleBookmarkClick }) => {
               </p>
               <h3 className="movie-title">{item.title}</h3>
             </div>
-            {/* 북마크 아이콘 추가 */}
             <div className="bookmark-icon" onClick={() => handleBookmarkClick(item)}>
-              <img src={require('../../../assets/bookmark.svg')} alt="Bookmark" />
+              <img 
+                src={require(`../../../assets/${bookmarkedMovies.some((m) => m._id === item._id) ? 'bookmarkC.svg' : 'bookmark.svg'}`)} 
+                alt="Bookmark" 
+              />
             </div>
           </div>
         ))}

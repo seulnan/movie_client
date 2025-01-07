@@ -1,0 +1,43 @@
+.bookmark-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: none; /* 배경 제거 */
+    box-shadow: none; /* 그림자 제거 */
+  }
+  
+  .bookmark-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .bookmark-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px; /* 이미지도 카드와 함께 둥글게 */
+  }
+  
+  .bookmark-details {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none; /* 배경 제거 */
+  }
+  
+  .bookmark-title,
+  .bookmark-year {
+    margin: 0;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .bookmark-year {
+    font-weight: 300;
+    opacity: 0.8;
+  }
+  

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import bookmark from "../../../assets/bookmark.svg";
+import bookmarkH from "../../../assets/bookmarkH.svg";
+import bookmarkC from "../../../assets/bookmarkC.svg";
 
-const Bookmarked = ({ handleBookmarkClick }) => {
+const Bookmarked = () => {
   const [bookmarkedMovies, setBookmarkedMovies] = useState([]);
   const [bookmarkedTVSeries, setBookmarkedTVSeries] = useState([]);
 
@@ -12,13 +15,8 @@ const Bookmarked = ({ handleBookmarkClick }) => {
           "http://localhost:5001/api/works/bookmarks"
         );
 
-        // 카테고리별로 분류
-        const movies = response.data.filter(
-          (item) => item.category === "Movie"
-        );
-        const tvSeries = response.data.filter(
-          (item) => item.category === "TV Series"
-        );
+        const movies = response.data.filter((item) => item.category === "Movie");
+        const tvSeries = response.data.filter((item) => item.category === "TV Series");
 
         setBookmarkedMovies(movies);
         setBookmarkedTVSeries(tvSeries);
@@ -30,71 +28,66 @@ const Bookmarked = ({ handleBookmarkClick }) => {
     fetchBookmarks();
   }, []);
 
+  const toggleBookmark = async (id) => {
+    try {
+      const response = await axios.patch(
+        `http://localhost:5001/api/works/${id}/bookmark`
+      );
+
+      const updatedBookmark = response.data.isBookmarked;
+
+      // Update bookmarked lists
+      setBookmarkedMovies((prev) =>
+        prev.filter((movie) => (movie._id === id ? updatedBookmark : movie))
+      );
+      setBookmarkedTVSeries((prev) =>
+        prev.filter((series) => (series._id === id ? updatedBookmark : series))
+      );
+    } catch (error) {
+      console.error("Error toggling bookmark:", error.message);
+    }
+  };
+
+  const renderItems = (items, category) => (
+    <div className="category-section">
+      <h2 className="category-title">Bookmarked {category}</h2>
+      <div className="movie-list">
+        {items.map((item) => (
+          <div key={item._id} className="movie-item">
+            <img
+              src={item.thumbnailUrl.regularLarge}
+              alt={item.title}
+              className="movie-thumbnail"
+            />
+            <div className="movie-info">
+              <p>
+                {item.year} • {item.category} • {item.rating}
+              </p>
+              <h3>{item.title}</h3>
+            </div>
+            <div
+              className="bookmark-icon"
+              onClick={() => toggleBookmark(item._id)}
+            >
+              <img
+                src={item.isBookmarked ? bookmarkC : bookmark}
+                alt="Bookmark"
+                onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
+                onMouseOut={(e) =>
+                  (e.currentTarget.src = item.isBookmarked ? bookmarkC : bookmark)
+                }
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <div className="bookmark-page">
-      {/* Bookmarked Movies */}
-      <div className="category-section">
-        <h2 className="category-title">Bookmarked Movies</h2>
-        <div className="movie-list">
-          {bookmarkedMovies.map((movie) => (
-            <div key={movie._id} className="movie-item">
-              <img
-                src={movie.thumbnailUrl.regularLarge}
-                alt={movie.title}
-                className="movie-thumbnail"
-              />
-              <div className="movie-info">
-                <p>
-                  {movie.year} • {movie.category} • {movie.rating}
-                </p>
-                <h3>{movie.title}</h3>
-              </div>
-              {/* 북마크 아이콘 */}
-              <div
-                className="bookmark-icon"
-                onClick={() => handleBookmarkClick(movie)}
-              >
-                <img
-                  src={require("../../../assets/bookmark.svg")}
-                  alt="Bookmark"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Bookmarked TV Series */}
-      <div className="category-section">
-        <h2 className="category-title">Bookmarked TV Series</h2>
-        <div className="movie-list">
-          {bookmarkedTVSeries.map((series) => (
-            <div key={series._id} className="movie-item">
-              <img
-                src={series.thumbnailUrl.regularLarge}
-                alt={series.title}
-                className="movie-thumbnail"
-              />
-              <div className="movie-info">
-                <p>
-                  {series.year} • {series.category} • {series.rating}
-                </p>
-                <h3>{series.title}</h3>
-              </div>
-              {/* 북마크 아이콘 */}
-              <div
-                className="bookmark-icon"
-                onClick={() => handleBookmarkClick(series)}
-              >
-                <img
-                  src={require("../../../assets/bookmark.svg")}
-                  alt="Bookmark"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      {renderItems(bookmarkedMovies, "Movies")}
+      {renderItems(bookmarkedTVSeries, "TV Series")}
     </div>
   );
 };
