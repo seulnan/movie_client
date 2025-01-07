@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Trending.css';
 
+// 이미지 경로를 import로 가져오기
+import bookmarkIcon from '../../../assets/bookmark.svg';
+import bookmarkHover from '../../../assets/bookmarkH.svg';
+import bookmarkClicked from '../../../assets/bookmarkC.svg';
+
 const Trending = () => {
   const [trendingData, setTrendingData] = useState([]);
   const [bookmarkedMovies, setBookmarkedMovies] = useState([]);
@@ -19,11 +24,21 @@ const Trending = () => {
     fetchTrendingData();
   }, []);
 
-  const handleBookmarkClick = (movie) => {
-    if (bookmarkedMovies.some((m) => m._id === movie._id)) {
-      setBookmarkedMovies(bookmarkedMovies.filter((m) => m._id !== movie._id));
-    } else {
-      setBookmarkedMovies([...bookmarkedMovies, movie]);
+  // 북마크 클릭 핸들러
+  const handleBookmarkClick = async (movie) => {
+    const isBookmarked = bookmarkedMovies.some((m) => m._id === movie._id);
+
+    try {
+      const response = await axios.patch(`http://localhost:5001/api/works/${movie._id}/bookmark`);
+      const updatedBookmark = response.data.isBookmarked;
+
+      if (updatedBookmark) {
+        setBookmarkedMovies((prev) => [...prev, movie]); // 북마크 추가
+      } else {
+        setBookmarkedMovies((prev) => prev.filter((m) => m._id !== movie._id)); // 북마크 제거
+      }
+    } catch (error) {
+      console.error('Error toggling bookmark:', error.message);
     }
   };
 
@@ -44,10 +59,17 @@ const Trending = () => {
               </p>
               <h3 className="movie-title">{item.title}</h3>
             </div>
-            <div className="bookmark-icon" onClick={() => handleBookmarkClick(item)}>
-              <img 
-                src={require(`../../../assets/${bookmarkedMovies.some((m) => m._id === item._id) ? 'bookmarkC.svg' : 'bookmark.svg'}`)} 
-                alt="Bookmark" 
+            <div
+              className="bookmark-icon"
+              onClick={() => handleBookmarkClick(item)}
+            >
+              <img
+                src={bookmarkedMovies.some((m) => m._id === item._id) ? bookmarkClicked : bookmarkIcon}
+                alt="Bookmark"
+                onMouseOver={(e) => (e.currentTarget.src = bookmarkHover)}
+                onMouseOut={(e) =>
+                  (e.currentTarget.src = bookmarkedMovies.some((m) => m._id === item._id) ? bookmarkClicked : bookmarkIcon)
+                }
               />
             </div>
           </div>

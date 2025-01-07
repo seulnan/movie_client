@@ -1,16 +1,67 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./TVseries.css";
+import bookmark from "../../../assets/bookmark.svg";
+import bookmarkH from "../../../assets/bookmarkH.svg";
+import bookmarkC from "../../../assets/bookmarkC.svg";
 
-const TVseries = ({ handleBookmarkClick }) => {
+// Common functionality across components
+const toggleBookmark = async (id, setItems) => {
+  try {
+    const response = await axios.patch(`http://localhost:5001/api/works/${id}/bookmark`);
+    const updatedBookmark = response.data.isBookmarked;
+
+    // Update the local state
+    setItems((prev) =>
+      prev.map((item) =>
+        item._id === id ? { ...item, isBookmarked: updatedBookmark } : item
+      )
+    );
+  } catch (error) {
+    console.error("Error toggling bookmark:", error.message);
+  }
+};
+
+const renderItems = (items, setItems) => (
+  <div className="movie-list">
+    {items.map((item) => (
+      <div key={item._id} className="movie-item">
+        <img
+          src={item.thumbnailUrl.regularLarge}
+          alt={item.title}
+          className="movie-thumbnail"
+        />
+        <div className="movie-info">
+          <p>
+            {item.year} • {item.category} • {item.rating}
+          </p>
+          <h3>{item.title}</h3>
+        </div>
+        <div
+          className="bookmark-icon"
+          onClick={() => toggleBookmark(item._id, setItems)}
+        >
+          <img
+            src={item.isBookmarked ? bookmarkC : bookmark}
+            alt="Bookmark"
+            onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
+            onMouseOut={(e) =>
+              (e.currentTarget.src = item.isBookmarked ? bookmarkC : bookmark)
+            }
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+// TVSeries Component
+const TVseries = () => {
   const [tvSeries, setTVSeries] = useState([]);
 
   useEffect(() => {
     const fetchTVSeries = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5001/api/works/tvseries"
-        );
+        const response = await axios.get("http://localhost:5001/api/works/tvseries");
         setTVSeries(response.data);
       } catch (error) {
         console.error("Error fetching TV series:", error.message);
@@ -23,33 +74,7 @@ const TVseries = ({ handleBookmarkClick }) => {
   return (
     <div className="tvseries">
       <h2>TV Series</h2>
-      <div className="movie-list">
-        {tvSeries.map((series) => (
-          <div key={series._id} className="movie-item">
-            <img
-              src={series.thumbnailUrl.regularLarge}
-              alt={series.title}
-              className="movie-thumbnail"
-            />
-            <div className="movie-info">
-              <p>
-                {series.year} • {series.category} • {series.rating}
-              </p>
-              <h3>{series.title}</h3>
-            </div>
-            {/* 북마크 아이콘 추가 */}
-            <div
-              className="bookmark-icon"
-              onClick={() => handleBookmarkClick(series)}
-            >
-              <img
-                src={require("../../../assets/bookmark.svg")}
-                alt="Bookmark"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+      {renderItems(tvSeries, setTVSeries)}
     </div>
   );
 };

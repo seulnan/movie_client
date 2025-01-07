@@ -52,22 +52,10 @@
     font-weight: 300;
     opacity: 0.8;
   }
-  
-  /* 북마크 아이콘 스타일 */
-  .bookmark-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+
   
   .bookmark-icon img {
-    width: 16px;
-    height: 16px;
+    width: 30px;
+    height: 30px;
   }
   
