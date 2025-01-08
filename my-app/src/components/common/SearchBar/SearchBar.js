@@ -1,7 +1,34 @@
-import React from "react"; 
+import React, { useState } from "react";
+import axios from "axios";
 import "./SearchBar.css";
 
-const SearchBar = () => {
+const SearchBar = ({ setFilteredData }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // 검색어를 처리하는 함수
+  const handleSearch = async () => {
+    if (searchTerm.trim()) {
+      try {
+        // 예시로 Movies API를 기준으로 검색
+        const response = await axios.get(`http://localhost:5001/api/works/search`, {
+          params: { query: searchTerm }, // 쿼리 파라미터로 검색어 전달
+        });
+
+        // 검색된 데이터를 상위 컴포넌트로 전달
+        setFilteredData(response.data);
+      } catch (error) {
+        console.error("Error fetching search results:", error.message);
+      }
+    }
+  };
+
+  // Enter 키로 검색도 가능하게 하기
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="search-bar">
       <svg
@@ -10,6 +37,7 @@ const SearchBar = () => {
         height="32"
         viewBox="0 0 32 32"
         fill="none"
+        onClick={handleSearch} // 돋보기 클릭 시 검색
       >
         <rect opacity="0.01" width="32" height="32" fill="black" />
         <path
@@ -19,7 +47,13 @@ const SearchBar = () => {
           fill="white"
         />
       </svg>
-      <input type="text" placeholder="Search for movies or TV series" />
+      <input
+        type="text"
+        placeholder="Search for movies or TV series"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)} // 입력값 처리
+        onKeyPress={handleKeyPress} // 엔터 키 입력 처리
+      />
     </div>
   );
 };

@@ -39,7 +39,6 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  background-color: transparent; /* 명시적으로 배경 제거 */
 }
 
 .movie-info p,
