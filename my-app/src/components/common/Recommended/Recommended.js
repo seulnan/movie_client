@@ -3,6 +3,8 @@ import axios from "axios";
 import bookmark from "../../../assets/bookmark.svg";
 import bookmarkH from "../../../assets/bookmarkH.svg";
 import bookmarkC from "../../../assets/bookmarkC.svg";
+import movieIcon from "../../../assets/movie2.svg";
+import tvIcon from "../../../assets/tv2.svg";
 import "./Recommended.css";
 
 const Recommended = () => {
@@ -30,7 +32,6 @@ const Recommended = () => {
       );
       const updatedBookmark = response.data.isBookmarked;
 
-      // Update movie list locally after bookmark toggle
       setRecommendedMovies((prevMovies) =>
         prevMovies.map((movie) =>
           movie._id === id ? { ...movie, isBookmarked: updatedBookmark } : movie
@@ -54,7 +55,16 @@ const Recommended = () => {
             />
             <div className="movie-info">
               <p>
-                {movie.year} • {movie.category} • {movie.rating}
+                {movie.year} •{" "}
+                <span className="category">
+                  <img
+                    src={movie.category === "Movie" ? movieIcon : tvIcon}
+                    alt={movie.category}
+                    className="category-icon"
+                  />{" "}
+                  {movie.category}
+                </span>{" "}
+                • {movie.rating}
               </p>
               <h3>{movie.title}</h3>
             </div>

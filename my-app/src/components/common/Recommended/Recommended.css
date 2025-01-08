@@ -53,6 +53,12 @@
   opacity: 0.8;
 }
 
+.category-icon {
+  width: 13px; /* 아이콘의 너비 */
+  height: 13px; /* 아이콘의 높이 */
+  margin-right: 4px; /* 아이콘과 텍스트 간의 간격 */
+}
+
 /* 북마크 아이콘 스타일 */
 .bookmark-icon {
   position: absolute;
@@ -69,3 +75,5 @@
   width: 30px;
   height: 30px;
 }
+
+

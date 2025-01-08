@@ -6,6 +6,8 @@ import './Trending.css';
 import bookmarkIcon from '../../../assets/bookmark.svg';
 import bookmarkHover from '../../../assets/bookmarkH.svg';
 import bookmarkClicked from '../../../assets/bookmarkC.svg';
+import movieIcon from '../../../assets/movie2.svg';
+import tvIcon from '../../../assets/tv2.svg';
 
 const Trending = () => {
   const [trendingData, setTrendingData] = useState([]);
@@ -26,8 +28,6 @@ const Trending = () => {
 
   // 북마크 클릭 핸들러
   const handleBookmarkClick = async (movie) => {
-    const isBookmarked = bookmarkedMovies.some((m) => m._id === movie._id);
-
     try {
       const response = await axios.patch(`http://localhost:5001/api/works/${movie._id}/bookmark`);
       const updatedBookmark = response.data.isBookmarked;
@@ -55,7 +55,17 @@ const Trending = () => {
             />
             <div className="card-info">
               <p className="movie-info">
-                {item.year} • {item.category} • {item.rating}
+                {item.year} •{' '}
+                <span className="category">
+                  <img
+                    src={item.category === 'Movie' ? movieIcon : tvIcon}
+                    alt={item.category}
+                    className="category-icon"
+                    style={{ width: '13px', height: '13px' }} // Inline style for 13x13 size
+                  />{' '}
+                  {item.category}
+                </span>{' '}
+                • {item.rating}
               </p>
               <h3 className="movie-title">{item.title}</h3>
             </div>

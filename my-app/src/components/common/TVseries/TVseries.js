@@ -3,14 +3,15 @@ import axios from "axios";
 import bookmark from "../../../assets/bookmark.svg";
 import bookmarkH from "../../../assets/bookmarkH.svg";
 import bookmarkC from "../../../assets/bookmarkC.svg";
+import movieIcon from "../../../assets/movie2.svg";
+import tvIcon from "../../../assets/tv2.svg";
+import "./TVseries.css";
 
-// Common functionality across components
 const toggleBookmark = async (id, setItems) => {
   try {
     const response = await axios.patch(`http://localhost:5001/api/works/${id}/bookmark`);
     const updatedBookmark = response.data.isBookmarked;
 
-    // Update the local state
     setItems((prev) =>
       prev.map((item) =>
         item._id === id ? { ...item, isBookmarked: updatedBookmark } : item
@@ -32,7 +33,16 @@ const renderItems = (items, setItems) => (
         />
         <div className="movie-info">
           <p>
-            {item.year} • {item.category} • {item.rating}
+            {item.year} •{" "}
+            <span className="category">
+              <img
+                src={item.category === "Movie" ? movieIcon : tvIcon}
+                alt={item.category}
+                className="category-icon"
+              />{" "}
+              {item.category}
+            </span>{" "}
+            • {item.rating}
           </p>
           <h3>{item.title}</h3>
         </div>
@@ -54,7 +64,6 @@ const renderItems = (items, setItems) => (
   </div>
 );
 
-// TVSeries Component
 const TVseries = () => {
   const [tvSeries, setTVSeries] = useState([]);
 
