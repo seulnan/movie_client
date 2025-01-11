@@ -52,9 +52,10 @@
 }
 
 .card-info p {
-  margin: 0;
+  margin-bottom: 0;
   font-size: 14px;
   opacity: 0.9;
+  flex-direction: row;
 }
 
 .card-info h3 {

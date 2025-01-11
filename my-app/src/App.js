@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import './index.css'; // 글로벌 스타일 적용
 import Sidebar from "./components/common/Sidebar/Sidebar";
 import SearchBar from "./components/common/SearchBar/SearchBar";
 import Home from "./components/common/Home/Home";
