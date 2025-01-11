@@ -1,4 +1,6 @@
 .search-bar {
+  margin-bottom: 20px;
+  
   display: flex;
   align-items: center;
   gap: 16px; /* 아이콘과 입력창 사이 간격 */
