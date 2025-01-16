@@ -66,7 +66,7 @@ const renderItems = (items, setItems) => (
   </div>
 );
 
-const Bookmarked = () => {
+const Bookmarked = ({ searchQuery }) => {
   const [bookmarkedMovies, setBookmarkedMovies] = useState([]);
   const [bookmarkedTVSeries, setBookmarkedTVSeries] = useState([]);
 
@@ -90,13 +90,22 @@ const Bookmarked = () => {
     fetchBookmarks();
   }, []);
 
+  // 검색어에 따라 필터링
+  const filteredMovies = bookmarkedMovies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredTVSeries = bookmarkedTVSeries.filter((series) =>
+    series.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="bookmark-page">
       <h2>Bookmarked Movies</h2>
-      {renderItems(bookmarkedMovies, setBookmarkedMovies)}
+      {renderItems(filteredMovies, setBookmarkedMovies)}
 
       <h2>Bookmarked TV Series</h2>
-      {renderItems(bookmarkedTVSeries, setBookmarkedTVSeries)}
+      {renderItems(filteredTVSeries, setBookmarkedTVSeries)}
     </div>
   );
 };

@@ -1,38 +1,55 @@
 .search-bar {
-  margin-bottom: 20px;
-  
   display: flex;
   align-items: center;
-  gap: 16px; /* 아이콘과 입력창 사이 간격 */
-  padding: 8px; /* 검색창 전체 패딩 */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.search-result-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
   border-radius: 8px;
+  padding: 10px;
 }
 
-.search-bar svg {
-  flex-shrink: 0;
+.thumbnail {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
-.search-bar input {
-  flex: 1; /* 입력창이 가능한 모든 공간 차지 */
-  background: none;
-  border: none;
-  outline: none;
-  color: var(--Pure-White, #FFF);
-  font-family: Outfit, sans-serif;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  font-feature-settings: 'liga' off, 'clig' off;
+.card-info h3 {
+  font-size: 18px;
+  margin: 0;
 }
 
-.search-bar input::placeholder {
-  color: var(--Gray, #8C8C8C); /* 플레이스홀더 색상 */
-}
-
-.search-bar .divider-bar {
-  width: 2px;
-  height: 31px;
-  background: var(--Red, #FC4747);
-  flex-shrink: 0;
+.card-info p {
+  font-size: 14px;
+  opacity: 0.7;
 }
