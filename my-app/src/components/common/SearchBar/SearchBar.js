@@ -16,7 +16,7 @@ const SearchBar = ({ onSearch }) => {
         type="text"
         value={searchTerm}
         onChange={handleSearch}
-        placeholder="Search for movies or TV series..."
+        placeholder="Search for movies or TV series"
       />
     </div>
   );

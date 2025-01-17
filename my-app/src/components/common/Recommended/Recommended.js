@@ -7,7 +7,7 @@ import movieIcon from "../../../assets/movie2.svg";
 import tvIcon from "../../../assets/tv2.svg";
 import "./Recommended.css";
 
-const Recommended = () => {
+const Recommended = ({ searchQuery }) => {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
 
   useEffect(() => {
@@ -42,11 +42,16 @@ const Recommended = () => {
     }
   };
 
+  // 검색어에 따라 필터링
+  const filteredMovies = recommendedMovies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="recommended">
       <h2>Recommended for you</h2>
       <div className="movie-list">
-        {recommendedMovies.map((movie) => (
+        {filteredMovies.map((movie) => (
           <div key={movie._id} className="movie-item">
             <img
               src={movie.thumbnailUrl.regularLarge}
