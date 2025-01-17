@@ -34,7 +34,6 @@ const SearchBar = ({ onSearch }) => {
         value={query}
         onChange={handleInputChange}
       />
-      <div className={`typing-bar ${query.trim() ? "active" : ""}`}></div>
     </div>
   );
 };
