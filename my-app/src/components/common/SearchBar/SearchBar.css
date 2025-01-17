@@ -6,6 +6,7 @@
 }
 
 .search-icon {
+  margin-bottom:20px;
   position: absolute;
   left: 24px; /* 왼쪽 24px 위치 */
   width: 24px; /* 돋보기 이미지 크기 */
@@ -14,36 +15,39 @@
 }
 
 .search-input {
-  width: 400px; /* 입력창 너비 */
+  margin-bottom: 20px;
+  margin-left: 20px;
+  width: 400px; /* 입력창 기본 너비 */
   padding: 10px 12px 10px 50px; /* 왼쪽 여백: 아이콘 크기 + 간격 */
   border: none;
-  border-bottom: 2px solid transparent;
+  border-bottom: 2px solid transparent; /* 기본 투명한 언더바 */
   background-color: transparent;
   color: white;
   font-size: 16px;
   outline: none;
   transition: border-color 0.3s ease, width 0.3s ease;
-}
-
-.search-input::placeholder {
-  width: 1184px;
-  height: 1px;
-  flex-shrink: 0;
-  color : #5A698F;
-}
-
-.search-bar:hover .search-input {
-  border-bottom-color: #95a5a6;
-}
-
-.typing-bar.active {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
-.search-input {
-  width: 2px;
-  height: 31px;
-  flex-shrink: 0;
   caret-color: red; /* 커서 색상을 빨간색으로 설정 */
+}
+
+/* Hover나 Active 상태에서 언더바 표시 */
+.search-bar:hover .search-input,
+.search-input:focus {
+  margin-left: 20px;
+  border-bottom-color: #5A698F; /* 언더바 색상 */
+}
+
+/* 기본 placeholder 스타일 */
+.search-input::placeholder {
+  color: #95a5a6; /* 회색 placeholder */
+  opacity: 1; /* 항상 표시 */
+}
+
+/* placeholder의 hover 스타일 */
+.search-bar:hover .search-input::placeholder {
+  color: #ffffff; /* hover 시 흰색 */
+}
+
+/* focus 상태에서 입력창 너비 확장 */
+.search-bar:hover .search-input {
+  width: 1184px; /* 호버 시 입력창 확장 */
 }
