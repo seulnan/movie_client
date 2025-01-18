@@ -9,7 +9,6 @@ import "./Movies.css";
 const Movies = ({ searchQuery }) => {
   const [movies, setMovies] = useState([]);
 
-  // 데이터 가져오기
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -23,7 +22,6 @@ const Movies = ({ searchQuery }) => {
     fetchMovies();
   }, []);
 
-  // 북마크 토글
   const toggleBookmark = async (id) => {
     try {
       const response = await axios.patch(`http://localhost:5001/api/works/${id}/bookmark`);
@@ -39,21 +37,19 @@ const Movies = ({ searchQuery }) => {
     }
   };
 
-  // 검색어에 따라 필터링
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // 아이템 렌더링
   const renderMovies = () =>
     filteredMovies.map((movie) => (
-      <div key={movie._id} className="movie-item">
+      <div key={movie._id} className="movie-item movies-item">
         <img
           src={movie.thumbnailUrl.regularLarge}
           alt={movie.title}
-          className="movie-thumbnail"
+          className="movie-thumbnail movies-thumbnail"
         />
-        <div className="movie-info">
+        <div className="movie-info movies-info">
           <p>
             {movie.year} •{" "}
             <span className="category">
@@ -64,7 +60,7 @@ const Movies = ({ searchQuery }) => {
           <h3>{movie.title}</h3>
         </div>
         <div
-          className="bookmark-icon"
+          className="bookmark-icon movies-bookmark-icon"
           onClick={() => toggleBookmark(movie._id)}
         >
           <img
@@ -80,9 +76,9 @@ const Movies = ({ searchQuery }) => {
     ));
 
   return (
-    <div className="movies">
-      <h2>Movies</h2>
-      <div className="movie-list">{renderMovies()}</div>
+    <div className="movies movies-page">
+      <h2 className="movies-header">Movies</h2>
+      <div className="movie-list movies-list">{renderMovies()}</div>
     </div>
   );
 };

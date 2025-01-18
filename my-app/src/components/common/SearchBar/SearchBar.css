@@ -51,3 +51,15 @@
 .search-bar:hover .search-input {
   width: 1184px; /* 호버 시 입력창 확장 */
 }
+
+/* 미디어 쿼리 - 모바일 */
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column; /* 세로 정렬 */
+    gap: 10px;
+  }
+
+  .search-input {
+    font-size: 0.9rem; /* 입력 크기 조정 */
+  }
+}

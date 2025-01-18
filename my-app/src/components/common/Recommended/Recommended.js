@@ -11,7 +11,6 @@ const Recommended = ({ searchQuery }) => {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // 데이터 fetch 함수
   const fetchRecommendedMovies = useCallback(async () => {
     try {
       const response = await axios.get("http://localhost:5001/api/works/recommend");
@@ -19,7 +18,7 @@ const Recommended = ({ searchQuery }) => {
     } catch (error) {
       console.error("Error fetching recommended movies:", error.message);
     } finally {
-      setIsLoading(false); // 로딩 상태 해제
+      setIsLoading(false);
     }
   }, []);
 
@@ -27,7 +26,6 @@ const Recommended = ({ searchQuery }) => {
     fetchRecommendedMovies();
   }, [fetchRecommendedMovies]);
 
-  // 북마크 토글 함수
   const toggleBookmark = useCallback(
     async (id) => {
       try {
@@ -46,7 +44,6 @@ const Recommended = ({ searchQuery }) => {
     []
   );
 
-  // 검색어 필터링
   const filteredMovies = recommendedMovies.filter((movie) =>
     movie.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -56,17 +53,17 @@ const Recommended = ({ searchQuery }) => {
   }
 
   return (
-    <div className="recommended">
-      <h2>Recommended for you</h2>
-      <div className="movie-list">
+    <div className="recommended recommended-page">
+      <h2 className="recommended-header">Recommended for you</h2>
+      <div className="movie-list recommended-list">
         {filteredMovies.map((movie) => (
-          <div key={movie._id} className="movie-item">
+          <div key={movie._id} className="movie-item recommended-item">
             <img
               src={movie.thumbnailUrl.regularLarge}
               alt={movie.title}
-              className="movie-thumbnail"
+              className="movie-thumbnail recommended-thumbnail"
             />
-            <div className="movie-info">
+            <div className="movie-info recommended-info">
               <p>
                 {movie.year} •{" "}
                 <span className="category">
@@ -82,16 +79,16 @@ const Recommended = ({ searchQuery }) => {
               <h3>{movie.title}</h3>
             </div>
             <div
-              className="bookmark-icon"
+              className="bookmark-icon recommended-bookmark-icon"
               onClick={() => toggleBookmark(movie._id)}
-              onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
-              onMouseOut={(e) =>
-                (e.currentTarget.src = movie.isBookmarked ? bookmarkC : bookmark)
-              }
             >
               <img
                 src={movie.isBookmarked ? bookmarkC : bookmark}
                 alt="Bookmark"
+                onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
+                onMouseOut={(e) =>
+                  (e.currentTarget.src = movie.isBookmarked ? bookmarkC : bookmark)
+                }
               />
             </div>
           </div>
