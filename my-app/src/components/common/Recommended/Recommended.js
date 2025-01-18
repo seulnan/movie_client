@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import bookmark from "../../../assets/bookmark.svg";
 import bookmarkH from "../../../assets/bookmarkH.svg";
@@ -9,43 +9,51 @@ import "./Recommended.css";
 
 const Recommended = ({ searchQuery }) => {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchRecommendedMovies = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5001/api/works/recommend"
-        );
-        setRecommendedMovies(response.data);
-      } catch (error) {
-        console.error("Error fetching recommended movies:", error.message);
-      }
-    };
-
-    fetchRecommendedMovies();
+  // 데이터 fetch 함수
+  const fetchRecommendedMovies = useCallback(async () => {
+    try {
+      const response = await axios.get("http://localhost:5001/api/works/recommend");
+      setRecommendedMovies(response.data);
+    } catch (error) {
+      console.error("Error fetching recommended movies:", error.message);
+    } finally {
+      setIsLoading(false); // 로딩 상태 해제
+    }
   }, []);
 
-  const toggleBookmark = async (id) => {
-    try {
-      const response = await axios.patch(
-        `http://localhost:5001/api/works/${id}/bookmark`
-      );
-      const updatedBookmark = response.data.isBookmarked;
+  useEffect(() => {
+    fetchRecommendedMovies();
+  }, [fetchRecommendedMovies]);
 
-      setRecommendedMovies((prevMovies) =>
-        prevMovies.map((movie) =>
-          movie._id === id ? { ...movie, isBookmarked: updatedBookmark } : movie
-        )
-      );
-    } catch (error) {
-      console.error("Error toggling bookmark:", error.message);
-    }
-  };
+  // 북마크 토글 함수
+  const toggleBookmark = useCallback(
+    async (id) => {
+      try {
+        const response = await axios.patch(`http://localhost:5001/api/works/${id}/bookmark`);
+        const updatedBookmark = response.data.isBookmarked;
 
-  // 검색어에 따라 필터링
+        setRecommendedMovies((prevMovies) =>
+          prevMovies.map((movie) =>
+            movie._id === id ? { ...movie, isBookmarked: updatedBookmark } : movie
+          )
+        );
+      } catch (error) {
+        console.error("Error toggling bookmark:", error.message);
+      }
+    },
+    []
+  );
+
+  // 검색어 필터링
   const filteredMovies = recommendedMovies.filter((movie) =>
     movie.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  if (isLoading) {
+    return <div className="loading">Loading...</div>;
+  }
 
   return (
     <div className="recommended">
@@ -76,16 +84,14 @@ const Recommended = ({ searchQuery }) => {
             <div
               className="bookmark-icon"
               onClick={() => toggleBookmark(movie._id)}
+              onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
+              onMouseOut={(e) =>
+                (e.currentTarget.src = movie.isBookmarked ? bookmarkC : bookmark)
+              }
             >
               <img
                 src={movie.isBookmarked ? bookmarkC : bookmark}
                 alt="Bookmark"
-                onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
-                onMouseOut={(e) =>
-                  (e.currentTarget.src = movie.isBookmarked
-                    ? bookmarkC
-                    : bookmark)
-                }
               />
             </div>
           </div>
