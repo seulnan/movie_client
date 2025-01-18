@@ -56,3 +56,14 @@ body {
   font-family: 'Outfit', sans-serif; /* 기본 body 폰트 설정 */
 }
 
+@media (max-width: 768px) {
+  .movie-list {
+    grid-template-columns: repeat(2, 1fr); /* 모바일에서는 2열 */
+    gap: 10px; /* 카드 간격 축소 */
+  }
+
+  .search-bar {
+    flex-direction: column; /* 검색바 세로 정렬 */
+    gap: 10px;
+  }
+}
