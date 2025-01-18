@@ -25,22 +25,22 @@ const toggleBookmark = async (id, setItems) => {
 };
 
 const renderItems = (items, setItems) => (
-  <div className="movie-list">
+  <div className="bookmark-page movie-list">
     {items.map((item) => (
-      <div key={item._id} className="movie-item">
+      <div key={item._id} className="bookmark-page movie-item">
         <img
           src={item.thumbnailUrl.regularLarge}
           alt={item.title}
-          className="movie-thumbnail"
+          className="bookmark-page movie-thumbnail"
         />
-        <div className="movie-info">
+        <div className="bookmark-page movie-info">
           <p>
             {item.year} •{" "}
-            <span className="category">
+            <span className="bookmark-page category">
               <img
                 src={item.category === "Movie" ? movieIcon : tvIcon}
                 alt={item.category}
-                className="category-icon"
+                className="bookmark-page category-icon"
               />{" "}
               {item.category}
             </span>{" "}
@@ -49,7 +49,7 @@ const renderItems = (items, setItems) => (
           <h3>{item.title}</h3>
         </div>
         <div
-          className="bookmark-icon"
+          className="bookmark-page bookmark-icon"
           onClick={() => toggleBookmark(item._id, setItems)}
         >
           <img
@@ -101,10 +101,10 @@ const Bookmarked = ({ searchQuery }) => {
 
   return (
     <div className="bookmark-page">
-      <h2>Bookmarked Movies</h2>
+      <h2 className="bookmark-page bookmarked-header">Bookmarked Movies</h2>
       {renderItems(filteredMovies, setBookmarkedMovies)}
 
-      <h2>Bookmarked TV Series</h2>
+      <h2 className="bookmark-page bookmarked-header">Bookmarked TV Series</h2>
       {renderItems(filteredTVSeries, setBookmarkedTVSeries)}
     </div>
   );

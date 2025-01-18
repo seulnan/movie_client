@@ -71,4 +71,28 @@
   height: 30px;
 }
 
+/* 미디어 쿼리 - 모바일 */
+@media (max-width: 768px) {
+  .recommended-page .content {
+    padding: 20px;
+    gap: 30px;
+  }
 
+  .recommended-page .movie-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* 미디어 쿼리 - 데스크탑 */
+@media (min-width: 1200px) {
+  .recommended-page .content {
+    padding: 50px;
+    gap: 70px;
+  }
+
+  .recommended-page .movie-list {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
+  }
+}

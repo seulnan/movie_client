@@ -28,12 +28,9 @@ body {
 
 .movie-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 열을 6개로 설정 */
-  grid-template-rows: repeat(6, auto); /* 행을 4개로 설정 */
+  grid-template-columns: repeat(4, 1fr); /* 기본 데스크탑에서는 4열 */
   gap: 20px; /* 카드 간 간격 설정 */
 }
-
-
 
 /* 부모 컨테이너 강제 적용 */
 .content .recommended {
@@ -42,7 +39,6 @@ body {
 }
 
 /* index.css 또는 App.css */
-
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 * {
@@ -56,14 +52,49 @@ body {
   font-family: 'Outfit', sans-serif; /* 기본 body 폰트 설정 */
 }
 
+/* 미디어 쿼리 - 모바일(768px 이하) */
 @media (max-width: 768px) {
+  .content {
+    padding: 20px;
+    gap: 30px; /* 섹션 간 간격 축소 */
+  }
+
   .movie-list {
     grid-template-columns: repeat(2, 1fr); /* 모바일에서는 2열 */
     gap: 10px; /* 카드 간격 축소 */
   }
 
+  .recommended h2 {
+    font-size: 1.5rem; /* 제목 크기 조정 */
+  }
+
   .search-bar {
     flex-direction: column; /* 검색바 세로 정렬 */
     gap: 10px;
+  }
+
+  .search-input {
+    font-size: 0.9rem; /* 검색 입력 필드 텍스트 크기 축소 */
+  }
+}
+
+/* 미디어 쿼리 - 데스크탑(1200px 이상) */
+@media (min-width: 1200px) {
+  .content {
+    padding: 50px;
+    gap: 70px; /* 섹션 간 간격 확대 */
+  }
+
+  .movie-list {
+    grid-template-columns: repeat(5, 1fr); /* 데스크탑에서는 5열 */
+    gap: 25px; /* 카드 간격 확대 */
+  }
+
+  .recommended h2 {
+    font-size: 2rem; /* 제목 크기 확대 */
+  }
+
+  .search-input {
+    font-size: 1rem; /* 검색 입력 필드 텍스트 크기 확대 */
   }
 }

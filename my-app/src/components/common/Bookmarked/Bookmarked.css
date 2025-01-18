@@ -1,43 +1,103 @@
-.bookmark-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-    background: none; /* 배경 제거 */
-    box-shadow: none; /* 그림자 제거 */
-  }
-  
-  .bookmark-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .bookmark-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px; /* 이미지도 카드와 함께 둥글게 */
-  }
-  
-  .bookmark-details {
+/* Bookmarked 페이지 전체를 감싸는 클래스 */
+.bookmarked-page {
+  padding: 20px;
+  background-color: #121212;
+}
+
+/* 헤더 스타일 */
+.bookmarked-header {
+  color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* 공통 스타일 */
+.bookmarked-page .movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.bookmarked-page .movie-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.bookmarked-page .movie-item:hover {
+  transform: scale(1.05);
+}
+
+.bookmarked-page .movie-thumbnail {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.bookmarked-page .movie-info {
+  padding: 10px;
+  background: none;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.bookmarked-page .movie-info p {
+  margin: 0;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.bookmarked-page .bookmark-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.bookmarked-page .bookmark-icon:hover {
+  transform: scale(1.2);
+}
+
+/* Movies 섹션 스타일 */
+.bookmarked-page .bookmarked-movies-list .movie-item {
+  background-color: #1e1e1e;
+}
+
+/* TV Series 섹션 스타일 */
+.bookmarked-page .bookmarked-tvseries-list .movie-item {
+  background-color: #2e2e2e;
+}
+
+/* 미디어 쿼리: 모바일 레이아웃 */
+@media (max-width: 768px) {
+  .bookmarked-page {
     padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background: none; /* 배경 제거 */
   }
-  
-  .bookmark-title,
-  .bookmark-year {
-    margin: 0;
-    color: #fff;
-    font-size: 14px;
+
+  .bookmarked-header {
+    font-size: 20px;
+    margin-bottom: 15px;
   }
-  
-  .bookmark-year {
-    font-weight: 300;
-    opacity: 0.8;
+
+  .bookmarked-page .movie-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
-  
+
+  .bookmarked-page .movie-thumbnail {
+    height: 120px;
+  }
+
+  .bookmarked-page .movie-info {
+    font-size: 12px;
+  }
+
+  .bookmarked-page .bookmark-icon {
+    top: 5px;
+    right: 5px;
+  }
+}

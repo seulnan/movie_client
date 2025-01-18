@@ -9,7 +9,6 @@ import "./TVseries.css";
 const TVseries = ({ searchQuery }) => {
   const [tvSeries, setTVSeries] = useState([]);
 
-  // 데이터 가져오기
   useEffect(() => {
     const fetchTVSeries = async () => {
       try {
@@ -22,7 +21,6 @@ const TVseries = ({ searchQuery }) => {
     fetchTVSeries();
   }, []);
 
-  // 북마크 토글
   const toggleBookmark = async (id) => {
     try {
       const { data } = await axios.patch(`http://localhost:5001/api/works/${id}/bookmark`);
@@ -36,23 +34,22 @@ const TVseries = ({ searchQuery }) => {
     }
   };
 
-  // 필터링된 TV 시리즈
   const filteredTVSeries = tvSeries.filter((series) =>
     series.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <div className="tvseries">
-      <h2>TV Series</h2>
-      <div className="movie-list">
+    <div className="tvseries tvseries-page">
+      <h2 className="tvseries-header">TV Series</h2>
+      <div className="movie-list tvseries-list">
         {filteredTVSeries.map((series) => (
-          <div key={series._id} className="movie-item">
+          <div key={series._id} className="movie-item tvseries-item">
             <img
               src={series.thumbnailUrl.regularLarge}
               alt={series.title}
-              className="movie-thumbnail"
+              className="movie-thumbnail tvseries-thumbnail"
             />
-            <div className="movie-info">
+            <div className="movie-info tvseries-info">
               <p>
                 {series.year} •{" "}
                 <span className="category">
@@ -63,7 +60,7 @@ const TVseries = ({ searchQuery }) => {
               <h3>{series.title}</h3>
             </div>
             <div
-              className="bookmark-icon"
+              className="bookmark-icon tvseries-bookmark-icon"
               onClick={() => toggleBookmark(series._id)}
             >
               <img
