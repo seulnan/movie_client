@@ -1,9 +1,3 @@
-/* Bookmarked 페이지 전체를 감싸는 클래스 */
-.bookmarked-page {
-  padding: 20px;
-  background-color: #121212;
-}
-
 /* 헤더 스타일 */
 .bookmarked-header {
   color: #ffffff;
@@ -73,19 +67,16 @@
   background-color: #2e2e2e;
 }
 
-/* 미디어 쿼리: 모바일 레이아웃 */
+/* 미디어 쿼리 - 모바일 레이아웃 */
 @media (max-width: 768px) {
-  .bookmarked-page {
-    padding: 10px;
-  }
-
   .bookmarked-header {
     font-size: 20px;
     margin-bottom: 15px;
   }
 
   .bookmarked-page .movie-list {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
   .bookmarked-page .movie-thumbnail {
@@ -99,5 +90,32 @@
   .bookmarked-page .bookmark-icon {
     top: 5px;
     right: 5px;
+  }
+}
+
+/* 미디어 쿼리 - 데스크탑 레이아웃 */
+@media (min-width: 1200px) {
+
+  .bookmarked-header {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  .bookmarked-page .movie-list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+
+  .bookmarked-page .movie-thumbnail {
+    height: 200px;
+  }
+
+  .bookmarked-page .movie-info {
+    font-size: 16px;
+  }
+
+  .bookmarked-page .bookmark-icon {
+    top: 10px;
+    right: 10px;
   }
 }

@@ -25,22 +25,22 @@ const toggleBookmark = async (id, setItems) => {
 };
 
 const renderItems = (items, setItems) => (
-  <div className="bookmark-page movie-list">
+  <div className="bookmarked-page movie-list">
     {items.map((item) => (
-      <div key={item._id} className="bookmark-page movie-item">
+      <div key={item._id} className="bookmarked-page movie-item">
         <img
           src={item.thumbnailUrl.regularLarge}
           alt={item.title}
-          className="bookmark-page movie-thumbnail"
+          className="bookmarked-page movie-thumbnail"
         />
-        <div className="bookmark-page movie-info">
+        <div className="bookmarked-page movie-info">
           <p>
             {item.year} •{" "}
-            <span className="bookmark-page category">
+            <span className="bookmarked-page category">
               <img
                 src={item.category === "Movie" ? movieIcon : tvIcon}
                 alt={item.category}
-                className="bookmark-page category-icon"
+                className="bookmarked-page category-icon"
               />{" "}
               {item.category}
             </span>{" "}
@@ -49,7 +49,7 @@ const renderItems = (items, setItems) => (
           <h3>{item.title}</h3>
         </div>
         <div
-          className="bookmark-page bookmark-icon"
+          className="bookmarked-page bookmark-icon"
           onClick={() => toggleBookmark(item._id, setItems)}
         >
           <img
@@ -78,7 +78,9 @@ const Bookmarked = ({ searchQuery }) => {
         );
 
         const movies = response.data.filter((item) => item.category === "Movie");
-        const tvSeries = response.data.filter((item) => item.category === "TV Series");
+        const tvSeries = response.data.filter(
+          (item) => item.category === "TV Series"
+        );
 
         setBookmarkedMovies(movies);
         setBookmarkedTVSeries(tvSeries);
@@ -100,11 +102,11 @@ const Bookmarked = ({ searchQuery }) => {
   );
 
   return (
-    <div className="bookmark-page">
-      <h2 className="bookmark-page bookmarked-header">Bookmarked Movies</h2>
+    <div className="bookmarked-page">
+      <h2 className="bookmarked-page bookmarked-header">Bookmarked Movies</h2>
       {renderItems(filteredMovies, setBookmarkedMovies)}
 
-      <h2 className="bookmark-page bookmarked-header">Bookmarked TV Series</h2>
+      <h2 className="bookmarked-page bookmarked-header">Bookmarked TV Series</h2>
       {renderItems(filteredTVSeries, setBookmarkedTVSeries)}
     </div>
   );
