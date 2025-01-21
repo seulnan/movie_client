@@ -24,7 +24,9 @@ const App = () => {
         <Sidebar />
         <div className="content">
           {/* SearchBar와 각 페이지 연결 */}
-          <SearchBar onSearch={handleSearch} />
+          <div className="search-bar-container">
+            <SearchBar onSearch={handleSearch} />
+          </div>
           <Routes>
             {/* Home Page */}
             <Route path="/home" element={<Home searchQuery={searchQuery} />} />
