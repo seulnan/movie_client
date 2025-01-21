@@ -38,22 +38,34 @@ body {
   grid-template-rows: auto;
 }
 
-/* index.css 또는 App.css */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Outfit', sans-serif; /* 글로벌 폰트 설정 */
+/* Sidebar 스타일 */
+.sidebar {
+  width: 96px; /* 기본 데스크탑 사이드바 너비 */
+  height: 960px;
+  flex-shrink: 0;
 }
 
-body {
-  font-family: 'Outfit', sans-serif; /* 기본 body 폰트 설정 */
+/* SearchBar 스타일 컨테이너 */
+.search-bar-container {
+  margin-bottom: 16px;
 }
 
 /* 미디어 쿼리 - 모바일(768px 이하) */
 @media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 375px;
+    height: 56px; /* 모바일 사이드바 높이 */
+    flex-shrink: 0;
+  }
+
+  .search-bar-container {
+    margin-top: 26px; /* SearchBar 위 간격 */
+  }
+
   .content {
     padding: 20px;
     gap: 30px; /* 섹션 간 간격 축소 */

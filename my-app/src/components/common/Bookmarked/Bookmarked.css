@@ -79,10 +79,6 @@
     gap: 10px;
   }
 
-  .bookmarked-page .movie-thumbnail {
-    height: 120px;
-  }
-
   .bookmarked-page .movie-info {
     font-size: 12px;
   }
