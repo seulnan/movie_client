@@ -1,9 +1,14 @@
 .trending {
-  margin-bottom: 40px;
+
 }
 
 .trending h2 {
   margin-bottom: 15px;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.5px;
 }
 
 .carousel {
