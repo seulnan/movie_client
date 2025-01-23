@@ -52,6 +52,15 @@ const Recommended = ({ searchQuery }) => {
     return <div className="loading">Loading...</div>;
   }
 
+  // 마우스 오버와 마우스 아웃 이벤트 핸들러 분리
+  const handleMouseOver = (e) => {
+    e.currentTarget.src = bookmarkH;
+  };
+
+  const handleMouseOut = (e, isBookmarked) => {
+    e.currentTarget.src = isBookmarked ? bookmarkC : bookmark;
+  };
+
   return (
     <div className="recommended recommended-page">
       {searchQuery && (
@@ -89,10 +98,8 @@ const Recommended = ({ searchQuery }) => {
               <img
                 src={movie.isBookmarked ? bookmarkC : bookmark}
                 alt="Bookmark"
-                onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
-                onMouseOut={(e) =>
-                  (e.currentTarget.src = movie.isBookmarked ? bookmarkC : bookmark)
-                }
+                onMouseOver={handleMouseOver}
+                onMouseOut={(e) => handleMouseOut(e, movie.isBookmarked)}
               />
             </div>
           </div>

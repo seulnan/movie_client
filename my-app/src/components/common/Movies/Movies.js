@@ -43,10 +43,12 @@ const Movies = ({ searchQuery }) => {
 
   return (
     <div className="movies movies-page">
-      {searchQuery && (
+      {searchQuery ? (
         <p className="search-results">
           Found {filteredMovies.length} result{filteredMovies.length !== 1 ? "s" : ""} for '{searchQuery}'
         </p>
+      ) : (
+        <h2 className="movies-header">Movies</h2>
       )}
       <div className="movie-list movies-list">
         {filteredMovies.map((movie) => (
