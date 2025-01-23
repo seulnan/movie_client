@@ -1,5 +1,10 @@
 .recommended h2 {
   color: #fff; /* 제목 색상 */
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.5px;
 }
 
 .movie-list {

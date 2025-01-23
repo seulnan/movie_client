@@ -32,6 +32,7 @@
 /* Hover나 Active 상태에서 언더바 표시 */
 .search-bar:hover .search-input,
 .search-input:focus {
+  width: 100%; /* 고정된 길이 */
   margin-left: 20px;
   border-bottom-color: #5A698F; /* 언더바 색상 */ ;
 }
