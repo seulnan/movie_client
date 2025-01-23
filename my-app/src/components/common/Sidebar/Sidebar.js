@@ -15,6 +15,7 @@ import BookmarkHoverIcon from "../../../assets/Bookmark2.svg";
 const Sidebar = () => {
   const [isHidden, setIsHidden] = useState(false); // Sidebar 숨김 상태 관리
   const [lastScrollY, setLastScrollY] = useState(0); // 마지막 스크롤 위치
+  const [activeIcon, setActiveIcon] = useState(""); // 현재 클릭된 아이콘 상태
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,8 +50,22 @@ const Sidebar = () => {
           key={item.name}
           to={item.path}
           className="icon"
+          onMouseEnter={() => {
+            if (activeIcon !== item.name) setActiveIcon(item.name + "-hover");
+          }}
+          onMouseLeave={() => {
+            if (activeIcon !== item.name) setActiveIcon("");
+          }}
+          onClick={() => setActiveIcon(item.name)}
         >
-          <img src={item.default} alt={`${item.name} Icon`} />
+          <img
+            src={
+              activeIcon === item.name || activeIcon === item.name + "-hover"
+                ? item.hover
+                : item.default
+            }
+            alt={`${item.name} Icon`}
+          />
         </NavLink>
       ))}
     </div>

@@ -24,47 +24,63 @@ const toggleBookmark = async (id, setItems) => {
   }
 };
 
-const renderItems = (items, setItems) => (
-  <div className="bookmarked-page movie-list">
-    {items.map((item) => (
-      <div key={item._id} className="bookmarked-page movie-item">
-        <img
-          src={item.thumbnailUrl.regularLarge}
-          alt={item.title}
-          className="bookmarked-page movie-thumbnail"
-        />
-        <div className="bookmarked-page movie-info">
-          <p>
-            {item.year} •{" "}
-            <span className="bookmarked-page category">
+const renderItems = (items, setItems, searchQuery, category) => {
+  const filteredItems = items.filter((item) =>
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <div>
+      {!searchQuery && (
+        <h2 className="bookmarked-page bookmarked-header">{`Bookmarked ${category}`}</h2>
+      )}
+      {searchQuery && (
+        <p className="search-results-text">
+          Found {filteredItems.length} results for '{searchQuery}'
+        </p>
+      )}
+      <div className="bookmarked-page movie-list">
+        {filteredItems.map((item) => (
+          <div key={item._id} className="bookmarked-page movie-item">
+            <img
+              src={item.thumbnailUrl.regularLarge}
+              alt={item.title}
+              className="bookmarked-page movie-thumbnail"
+            />
+            <div className="bookmarked-page movie-info">
+              <p>
+                {item.year} •{" "}
+                <span className="bookmarked-page category">
+                  <img
+                    src={item.category === "Movie" ? movieIcon : tvIcon}
+                    alt={item.category}
+                    className="bookmarked-page category-icon"
+                  />{" "}
+                  {item.category}
+                </span>{" "}
+                • {item.rating}
+              </p>
+              <h3>{item.title}</h3>
+            </div>
+            <div
+              className="bookmarked-page bookmark-icon"
+              onClick={() => toggleBookmark(item._id, setItems)}
+            >
               <img
-                src={item.category === "Movie" ? movieIcon : tvIcon}
-                alt={item.category}
-                className="bookmarked-page category-icon"
-              />{" "}
-              {item.category}
-            </span>{" "}
-            • {item.rating}
-          </p>
-          <h3>{item.title}</h3>
-        </div>
-        <div
-          className="bookmarked-page bookmark-icon"
-          onClick={() => toggleBookmark(item._id, setItems)}
-        >
-          <img
-            src={item.isBookmarked ? bookmarkC : bookmark}
-            alt="Bookmark"
-            onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
-            onMouseOut={(e) =>
-              (e.currentTarget.src = item.isBookmarked ? bookmarkC : bookmark)
-            }
-          />
-        </div>
+                src={item.isBookmarked ? bookmarkC : bookmark}
+                alt="Bookmark"
+                onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
+                onMouseOut={(e) =>
+                  (e.currentTarget.src = item.isBookmarked ? bookmarkC : bookmark)
+                }
+              />
+            </div>
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
-);
+    </div>
+  );
+};
 
 const Bookmarked = ({ searchQuery }) => {
   const [bookmarkedMovies, setBookmarkedMovies] = useState([]);
@@ -92,22 +108,10 @@ const Bookmarked = ({ searchQuery }) => {
     fetchBookmarks();
   }, []);
 
-  // 검색어에 따라 필터링
-  const filteredMovies = bookmarkedMovies.filter((movie) =>
-    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const filteredTVSeries = bookmarkedTVSeries.filter((series) =>
-    series.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
     <div className="bookmarked-page">
-      <h2 className="bookmarked-page bookmarked-header">Bookmarked Movies</h2>
-      {renderItems(filteredMovies, setBookmarkedMovies)}
-
-      <h2 className="bookmarked-page bookmarked-header">Bookmarked TV Series</h2>
-      {renderItems(filteredTVSeries, setBookmarkedTVSeries)}
+      {renderItems(bookmarkedMovies, setBookmarkedMovies, searchQuery, "Movies")}
+      {renderItems(bookmarkedTVSeries, setBookmarkedTVSeries, searchQuery, "TV Series")}
     </div>
   );
 };
