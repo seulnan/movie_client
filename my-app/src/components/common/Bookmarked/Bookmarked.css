@@ -68,6 +68,12 @@
 .bookmarked-page .bookmarked-tvseries-list .movie-item {
   background-color: #2e2e2e;
 }
+.search-results-text {
+  font-family: "Outfit", sans-serif;
+  font-size: 25px;
+  margin-bottom: 20px;
+  color: #fff;
+}
 
 /* 미디어 쿼리 - 모바일 레이아웃 */
 @media (max-width: 768px) {
