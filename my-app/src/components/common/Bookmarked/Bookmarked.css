@@ -1,9 +1,9 @@
 /* 헤더 스타일 */
 .bookmarked-header {
   color: #ffffff;
-  font-size: 32px;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
   letter-spacing: -0.5px;
 }  
@@ -99,7 +99,7 @@
 /* 미디어 쿼리 - 데스크탑 레이아웃 */
 @media (min-width: 1200px) {
   .bookmarked-header {
-    font-size: 28px;
+    font-size: 25px;
   }
 
   .bookmarked-page .movie-list {

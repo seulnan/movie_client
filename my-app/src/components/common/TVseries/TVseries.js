@@ -40,7 +40,12 @@ const TVseries = ({ searchQuery }) => {
 
   return (
     <div className="tvseries tvseries-page">
-      <h2 className="tvseries-header">TV Series</h2>
+      {!searchQuery && <h2 className="tvseries-header">TV Series</h2>}
+      {searchQuery && (
+        <p className="search-results-text">
+          Found {filteredTVSeries.length} results for '{searchQuery}'
+        </p>
+      )}
       <div className="movie-list tvseries-list">
         {filteredTVSeries.map((series) => (
           <div key={series._id} className="movie-item tvseries-item">

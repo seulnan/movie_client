@@ -54,7 +54,11 @@ const Recommended = ({ searchQuery }) => {
 
   return (
     <div className="recommended recommended-page">
-      <h2 className="recommended-header">Recommended for you</h2>
+      {searchQuery && (
+        <p className="search-results">
+          Found {filteredMovies.length} result{filteredMovies.length !== 1 ? "s" : ""} for '{searchQuery}'
+        </p>
+      )}
       <div className="movie-list recommended-list">
         {filteredMovies.map((movie) => (
           <div key={movie._id} className="movie-item recommended-item">
