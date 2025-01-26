@@ -1,3 +1,4 @@
+/* 공통 스타일 */
 .search-bar {
   position: relative;
   display: flex;
@@ -6,67 +7,85 @@
 }
 
 .search-icon {
-  margin-bottom:20px;
   position: absolute;
-  left: 24px; /* 왼쪽 24px 위치 */
-  width: 24px; /* 돋보기 이미지 크기 */
+  left: 24px;
+  width: 24px;
   height: 24px;
   cursor: pointer;
 }
 
 .search-input {
-  margin-bottom: 20px;
   margin-left: 20px;
-  width: 400px; /* 입력창 기본 너비 */
-  padding: 10px 12px 10px 50px; /* 왼쪽 여백: 아이콘 크기 + 간격 */
+  width: 100%;
+  padding: 10px 12px 10px 50px;
   border: none;
-  border-bottom: 2px solid transparent; /* 기본 투명한 언더바 */
+  border-bottom: 2px solid transparent;
   background-color: transparent;
   color: white;
   font-size: 16px;
   outline: none;
-  transition: border-color 0.3s ease, width 0.3s ease;
-  caret-color: red; /* 커서 색상을 빨간색으로 설정 */
+  transition: width 0.3s ease;
+  caret-color: red;
 }
 
-/* Hover나 Active 상태에서 언더바 표시 */
-.search-bar:hover .search-input,
-.search-input:focus {
-  width: 100%; /* 고정된 길이 */
-  margin-left: 20px;
-  border-bottom-color: #5A698F; /* 언더바 색상 */ ;
+/* Empty 상태 */
+.search-input:placeholder-shown {
+  border-bottom-color: #5a698f; /* 기본 밑줄 색상 */
 }
 
-/* 기본 placeholder 스타일 */
 .search-input::placeholder {
-  color: #95a5a6; /* 회색 placeholder */
-  opacity: 1; /* 항상 표시 */
+  color: #95a5a6;
+  opacity: 1;
 }
 
-/* placeholder의 hover 스타일 */
-.search-bar:hover .search-input::placeholder {
-  color: #ffffff; /* hover 시 흰색 */
+/* Filled 상태 */
+.search-input:not(:placeholder-shown) {
+  border-bottom-color: #5a698f; /* 글자가 있을 때 밑줄 */
 }
 
+.search-input:not(:placeholder-shown) + .search-icon {
+  opacity: 0.8; /* Filled 상태에서 아이콘의 강조 */
+}
+
+/* 미디어 쿼리 */
 @media (max-width: 768px) {
   .search-bar {
-    flex-direction: row; /* 가로 정렬 유지 */
-    justify-content: center; /* 가운데 정렬 */
-    width: 100%; /* 화면 너비에 맞춤 */
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
   }
 
   .search-input {
-    width: 80%; /* 화면 너비의 80% */
-    max-width: 600px; /* 최대 너비 제한 */
+    width: 80%;
+    max-width: 600px;
     font-size: 0.9rem;
-    padding: 10px 12px 10px 40px; /* 입력창 안쪽 여백 조정 */
-    margin-bottom: 0; /* 하단 간격 제거 */
-    border-bottom-color: #5A698F; /* 호버 및 포커스 색상 유지 */
+    padding: 10px 12px 10px 40px;
   }
 
   .search-icon {
-    position: absolute; /* 아이콘 고정 */
-    top : 5px;
-    left: 50px; /* 아이콘 위치 조정 */
+    top: 5px;
+    left: 50px;
+  }
+}
+
+
+/* 미디어 쿼리 */
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .search-input {
+    width: 80%;
+    max-width: 600px;
+    font-size: 0.9rem;
+    padding: 10px 12px 10px 40px;
+  }
+
+  .search-icon {
+    top: 5px;
+    left: 50px;
   }
 }
