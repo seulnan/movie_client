@@ -82,6 +82,8 @@
   color: #fff;
 }
 
+
+
 /* 미디어 쿼리 - 모바일 */
 @media (max-width: 768px) {
   .recommended-page .content {

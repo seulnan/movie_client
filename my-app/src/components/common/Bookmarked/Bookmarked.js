@@ -5,6 +5,7 @@ import bookmarkH from "../../../assets/bookmarkH.svg";
 import bookmarkC from "../../../assets/bookmarkC.svg";
 import movieIcon from "../../../assets/movie2.svg";
 import tvIcon from "../../../assets/tv2.svg";
+import playIcon from "../../../assets/play.svg"; // Add play icon if not already imported
 import "./Bookmarked.css";
 
 const toggleBookmark = async (id, setItems) => {
@@ -42,11 +43,17 @@ const renderItems = (items, setItems, searchQuery, category) => {
       <div className="bookmarked-page movie-list">
         {filteredItems.map((item) => (
           <div key={item._id} className="bookmarked-page movie-item">
-            <img
-              src={item.thumbnailUrl.regularLarge}
-              alt={item.title}
-              className="bookmarked-page movie-thumbnail"
-            />
+            <div className="thumbnail-container">
+              <img
+                src={item.thumbnailUrl.regularLarge}
+                alt={item.title}
+                className="bookmarked-page movie-thumbnail"
+              />
+              <div className="play-button">
+                <img src={playIcon} alt="Play" />
+                <span>Play</span>
+              </div>
+            </div>
             <div className="bookmarked-page movie-info">
               <p>
                 {item.year} •{" "}

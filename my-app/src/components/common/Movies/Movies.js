@@ -4,6 +4,7 @@ import bookmark from "../../../assets/bookmark.svg";
 import bookmarkH from "../../../assets/bookmarkH.svg";
 import bookmarkC from "../../../assets/bookmarkC.svg";
 import movieIcon from "../../../assets/movie2.svg";
+import playIcon from "../../../assets/play.svg"; // Play 아이콘 추가
 import "./Movies.css";
 
 const Movies = ({ searchQuery }) => {
@@ -53,11 +54,19 @@ const Movies = ({ searchQuery }) => {
       <div className="movie-list movies-list">
         {filteredMovies.map((movie) => (
           <div key={movie._id} className="movie-item movies-item">
-            <img
-              src={movie.thumbnailUrl.regularLarge}
-              alt={movie.title}
-              className="movie-thumbnail movies-thumbnail"
-            />
+            <div className="movie-thumbnail-container">
+              <img
+                src={movie.thumbnailUrl.regularLarge}
+                alt={movie.title}
+                className="movie-thumbnail movies-thumbnail"
+              />
+              <div className="hover-overlay">
+                <div className="play-button">
+                  <img src={playIcon} alt="Play" />
+                  <span>Play</span>
+                </div>
+              </div>
+            </div>
             <div className="movie-info movies-info">
               <p>
                 {movie.year} •{" "}

@@ -4,6 +4,7 @@ import bookmark from "../../../assets/bookmark.svg";
 import bookmarkH from "../../../assets/bookmarkH.svg";
 import bookmarkC from "../../../assets/bookmarkC.svg";
 import tvIcon from "../../../assets/tv2.svg";
+import playIcon from "../../../assets/play.svg"; // Play 아이콘 추가
 import "./TVseries.css";
 
 const TVseries = ({ searchQuery }) => {
@@ -49,11 +50,19 @@ const TVseries = ({ searchQuery }) => {
       <div className="movie-list tvseries-list">
         {filteredTVSeries.map((series) => (
           <div key={series._id} className="movie-item tvseries-item">
-            <img
-              src={series.thumbnailUrl.regularLarge}
-              alt={series.title}
-              className="movie-thumbnail tvseries-thumbnail"
-            />
+            <div className="movie-thumbnail-container">
+              <img
+                src={series.thumbnailUrl.regularLarge}
+                alt={series.title}
+                className="movie-thumbnail tvseries-thumbnail"
+              />
+              <div className="hover-overlay">
+                <div className="play-button">
+                  <img src={playIcon} alt="Play" />
+                  <span>Play</span>
+                </div>
+              </div>
+            </div>
             <div className="movie-info tvseries-info">
               <p>
                 {series.year} •{" "}

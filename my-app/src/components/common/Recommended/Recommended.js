@@ -5,6 +5,7 @@ import bookmarkH from "../../../assets/bookmarkH.svg";
 import bookmarkC from "../../../assets/bookmarkC.svg";
 import movieIcon from "../../../assets/movie2.svg";
 import tvIcon from "../../../assets/tv2.svg";
+import playIcon from "../../../assets/play.svg"; // Play 아이콘 추가
 import "./Recommended.css";
 
 const Recommended = ({ searchQuery }) => {
@@ -52,7 +53,6 @@ const Recommended = ({ searchQuery }) => {
     return <div className="loading">Loading...</div>;
   }
 
-  // 마우스 오버와 마우스 아웃 이벤트 핸들러 분리
   const handleMouseOver = (e) => {
     e.currentTarget.src = bookmarkH;
   };
@@ -71,11 +71,19 @@ const Recommended = ({ searchQuery }) => {
       <div className="movie-list recommended-list">
         {filteredMovies.map((movie) => (
           <div key={movie._id} className="movie-item recommended-item">
-            <img
-              src={movie.thumbnailUrl.regularLarge}
-              alt={movie.title}
-              className="movie-thumbnail recommended-thumbnail"
-            />
+            <div className="movie-thumbnail-container">
+              <img
+                src={movie.thumbnailUrl.regularLarge}
+                alt={movie.title}
+                className="movie-thumbnail recommended-thumbnail"
+              />
+              <div className="hover-overlay">
+                <div className="play-button">
+                  <img src={playIcon} alt="Play" />
+                  <span>Play</span>
+                </div>
+              </div>
+            </div>
             <div className="movie-info recommended-info">
               <p>
                 {movie.year} •{" "}
