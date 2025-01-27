@@ -24,13 +24,13 @@
   color: white;
   font-size: 16px;
   outline: none;
-  transition: width 0.3s ease;
+  transition: border-bottom 0.3s ease, width 0.3s ease;
   caret-color: red;
 }
 
-/* Empty 상태 */
+/* 밑줄 없음 (Empty 상태) */
 .search-input:placeholder-shown {
-  border-bottom-color: #5a698f; /* 기본 밑줄 색상 */
+  border-bottom: none; /* 아무 입력도 없을 때 밑줄 제거 */
 }
 
 .search-input::placeholder {
@@ -38,13 +38,14 @@
   opacity: 1;
 }
 
-/* Filled 상태 */
-.search-input:not(:placeholder-shown) {
-  border-bottom-color: #5a698f; /* 글자가 있을 때 밑줄 */
+/* 밑줄 있음 (Active 상태: 입력 중) */
+.search-input:focus:not(.search-complete) {
+  border-bottom-color: #5a698f; /* 활성 상태 밑줄 */
 }
 
-.search-input:not(:placeholder-shown) + .search-icon {
-  opacity: 0.8; /* Filled 상태에서 아이콘의 강조 */
+/* 검색 완료 상태 (밑줄 없음) */
+.search-input.search-complete {
+  border-bottom: none; /* 검색 완료 후 밑줄 제거 */
 }
 
 /* 미디어 쿼리 */
@@ -59,33 +60,10 @@
     width: 80%;
     max-width: 600px;
     font-size: 0.9rem;
-    padding: 10px 12px 10px 40px;
+    padding: 10px 12px 10px 50px;
   }
 
   .search-icon {
-    top: 5px;
-    left: 50px;
-  }
-}
-
-
-/* 미디어 쿼리 */
-@media (max-width: 768px) {
-  .search-bar {
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .search-input {
-    width: 80%;
-    max-width: 600px;
-    font-size: 0.9rem;
-    padding: 10px 12px 10px 40px;
-  }
-
-  .search-icon {
-    top: 5px;
-    left: 50px;
+    left: 30px; /* 아이콘 위치 고정 */
   }
 }
