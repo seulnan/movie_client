@@ -1,6 +1,19 @@
+/* 공통 스타일 */
+.movie-info p,
+.movie-info h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 14px;
+}
+
+.movie-info p {
+  font-weight: 300;
+  opacity: 0.8;
+}
+
 /* 추천 섹션 제목 스타일 */
 .recommended h2 {
-  color: #fff; /* 제목 색상 */
+  color: #fff;
   font-size: 25px;
   font-style: normal;
   font-weight: 400;
@@ -61,25 +74,6 @@
   opacity: 1; /* hover 시 나타남 */
 }
 
-/* 영화 정보 섹션 */
-.movie-info {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.movie-info p,
-.movie-info h3 {
-  margin: 0;
-  color: #fff;
-  font-size: 14px;
-}
-
-.movie-info p {
-  font-weight: 300;
-  opacity: 0.8;
-}
 
 /* 카테고리 아이콘 */
 .category-icon {
@@ -128,12 +122,12 @@
 
 /* 미디어 쿼리 - 데스크탑 */
 @media (min-width: 1200px) {
-  .recommended-page .content {
+  .content {
     padding: 50px;
     gap: 70px;
   }
 
-  .recommended-page .movie-list {
+  .movie-list {
     grid-template-columns: repeat(4, 1fr);
     gap: 25px;
   }
