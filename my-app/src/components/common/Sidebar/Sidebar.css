@@ -37,23 +37,26 @@
 /* 모바일 버전 */
 @media (max-width: 768px) {
   .sidebar {
-    width: 90vw; /* 모바일에서 화면 너비의 90% */
-    max-width: 700px; /* 최대 너비 제한 */
-    height: 56px; /* 모바일 사이드바의 세로 크기 */
+    width: 100vw; /* 모바일에서 화면 너비의 90% */
+    max-width: 800px; /* 최대 너비 제한 */
+    height: 66px; /* 모바일 사이드바의 세로 크기 */
     flex-direction: row; /* 아이콘을 가로로 배치 */
     position: relative;
-    top: 20px; /* SearchBar로부터 26px 위에 위치 */
-    margin: 0 auto; /* 가운데 정렬 */
+    border-radius: 0;
+    margin: 0; /* 가운데 정렬 */
     z-index: 10;
+    justify-content: center; /* 아이콘을 가운데 정렬 */
   }
 
-  .red-icon img {
-    margin-left: 30px;
-    margin-bottom: 30px;
+  .red-icon {
+    position: absolute; /* 빨간 아이콘은 사이드바 중앙에서 벗어나도록 설정 */
+    left: 20px; /* 왼쪽으로 이동 */
+    margin-bottom: 10px;
   }
 
   .icon {
-    margin-left: 80px;
+    margin-left: 15px; /* 각 아이콘 간 간격을 일정하게 유지 */
     margin-bottom: 35px;
+    margin-right: 15px;
   }
 }
