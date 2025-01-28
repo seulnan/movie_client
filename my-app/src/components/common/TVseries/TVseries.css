@@ -24,11 +24,7 @@
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
-  }
-  
-  .movie-item:hover .movie-thumbnail {
-    filter: blur(3px);
-  }  
+  } 
   
   .movie-thumbnail {
     width: 100%;

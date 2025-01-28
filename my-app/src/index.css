@@ -43,12 +43,6 @@
   transition: filter 0.3s ease; /* 호버시 흐려지는 효과 */
 }
 
-/* 이미지가 흐려지게 하는 효과 */
-.thumbnail-container:hover .movie-thumbnail {
-    filter: blur(3px);
-  
-}
-
 /* Hover effect for Play Button */
 .card:hover .play-button,
 .movie-thumbnail-container:hover .play-button {
