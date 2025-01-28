@@ -24,8 +24,8 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.movie-item:hover {
-  transform: scale(1.05);
+.movie-item:hover .movie-thumbnail {
+  filter: blur(3px);
 }
 
 .movie-thumbnail {

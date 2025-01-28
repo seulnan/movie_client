@@ -45,7 +45,8 @@
 
 /* 이미지가 흐려지게 하는 효과 */
 .thumbnail-container:hover .movie-thumbnail {
-  filter: grayscale(50%);
+    filter: blur(3px);
+  
 }
 
 /* Hover effect for Play Button */
