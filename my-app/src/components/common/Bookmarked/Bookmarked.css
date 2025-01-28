@@ -6,7 +6,7 @@
   font-weight: 300;
   line-height: normal;
   letter-spacing: -0.5px;
-}  
+}
 
 /* 공통 스타일 */
 .bookmarked-page .movie-list {
@@ -33,6 +33,36 @@
   object-fit: cover;
   border-radius: 8px;
 }
+
+/* Play 버튼 스타일 */
+.thumbnail-container {
+  position: relative;
+}
+
+.bookmarked-page .thumbnail-container .play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #fff;
+  border-radius: 28.5px;
+  width: 117px;
+  height: 48px;
+  font-size: 14px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s;
+}
+
+.bookmarked-page .thumbnail-container:hover .play-button {
+  visibility: visible;
+  opacity: 1;
+}
+
 
 .bookmarked-page .movie-info {
   padding: 10px;
@@ -68,6 +98,7 @@
 .bookmarked-page .bookmarked-tvseries-list .movie-item {
   background-color: #2e2e2e;
 }
+
 .search-results-text {
   font-family: "Outfit", sans-serif;
   font-size: 25px;

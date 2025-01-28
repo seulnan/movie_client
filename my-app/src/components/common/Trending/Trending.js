@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Trending.css';
 
+// 이미지 경로를 import로 가져오기
 import bookmarkIcon from '../../../assets/bookmark.svg';
 import bookmarkHover from '../../../assets/bookmarkH.svg';
 import bookmarkClicked from '../../../assets/bookmarkC.svg';
 import movieIcon from '../../../assets/movie2.svg';
 import tvIcon from '../../../assets/tv2.svg';
-import playIcon from '../../../assets/play.svg';
+import playIcon from '../../../assets/play.svg'; // Play 아이콘 추가
 
 const Trending = () => {
   const [trendingData, setTrendingData] = useState([]);
@@ -26,15 +27,16 @@ const Trending = () => {
     fetchTrendingData();
   }, []);
 
+  // 북마크 클릭 핸들러
   const handleBookmarkClick = async (movie) => {
     try {
       const response = await axios.patch(`http://localhost:5001/api/works/${movie._id}/bookmark`);
       const updatedBookmark = response.data.isBookmarked;
 
       if (updatedBookmark) {
-        setBookmarkedMovies((prev) => [...prev, movie]);
+        setBookmarkedMovies((prev) => [...prev, movie]); // 북마크 추가
       } else {
-        setBookmarkedMovies((prev) => prev.filter((m) => m._id !== movie._id));
+        setBookmarkedMovies((prev) => prev.filter((m) => m._id !== movie._id)); // 북마크 제거
       }
     } catch (error) {
       console.error('Error toggling bookmark:', error.message);
@@ -47,15 +49,15 @@ const Trending = () => {
       <div className="carousel">
         {trendingData.map((item) => (
           <div className="card" key={item._id}>
-            <div className="card-overlay">
+            <div className="card-image-container">
               <img
                 src={item.thumbnailUrl.regularLarge}
                 alt={item.title}
                 className="card-image"
               />
-              <div className="play-overlay">
+              <div className="hover-overlay">
                 <div className="play-button">
-                  <img src={playIcon} alt="Play" className="play-icon" />
+                  <img src={playIcon} alt="Play" />
                   <span>Play</span>
                 </div>
               </div>
@@ -68,6 +70,7 @@ const Trending = () => {
                     src={item.category === 'Movie' ? movieIcon : tvIcon}
                     alt={item.category}
                     className="category-icon"
+                    style={{ width: '13px', height: '13px' }} // Inline style for 13x13 size
                   />{' '}
                   {item.category}
                 </span>{' '}
