@@ -15,18 +15,15 @@
 .recommended h2 {
   color: #fff;
   font-size: 25px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   letter-spacing: -0.5px;
 }
 
 /* 영화 리스트 컨테이너 */
 .movie-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 열을 4개로 설정 */
-  grid-template-rows: auto; /* 행 크기 자동 */
-  gap: 20px; /* 카드 간 간격 */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 /* 개별 영화 아이템 */
@@ -41,7 +38,7 @@
 }
 
 .movie-item:hover {
-  transform: scale(1.05); /* hover 시 확대 */
+  transform: scale(1.05);
 }
 
 /* 영화 썸네일 */
@@ -62,8 +59,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* 반투명 어두운 배경 */
-  opacity: 0; /* 기본 상태에서 숨김 */
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,15 +68,14 @@
 }
 
 .movie-thumbnail-container:hover .hover-overlay {
-  opacity: 1; /* hover 시 나타남 */
+  opacity: 1;
 }
-
 
 /* 카테고리 아이콘 */
 .category-icon {
-  width: 13px; /* 아이콘의 너비 */
-  height: 13px; /* 아이콘의 높이 */
-  margin-right: 4px; /* 아이콘과 텍스트 간의 간격 */
+  width: 13px;
+  height: 13px;
+  margin-right: 4px;
 }
 
 /* 북마크 아이콘 스타일 */
@@ -109,11 +105,6 @@
 
 /* 미디어 쿼리 - 모바일 */
 @media (max-width: 768px) {
-  .recommended-page .content {
-    padding: 20px;
-    gap: 30px;
-  }
-
   .recommended-page .movie-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -122,11 +113,6 @@
 
 /* 미디어 쿼리 - 데스크탑 */
 @media (min-width: 1200px) {
-  .content {
-    padding: 50px;
-    gap: 70px;
-  }
-
   .movie-list {
     grid-template-columns: repeat(4, 1fr);
     gap: 25px;
