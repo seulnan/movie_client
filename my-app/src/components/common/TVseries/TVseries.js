@@ -12,15 +12,16 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 const TVseries = ({ searchQuery }) => {
   const [tvSeries, setTVSeries] = useState([]);
 
+  const fetchTVSeries = async () => {
+    try {
+      const { data } = await axios.get(`${API_BASE_URL}/tvseries`);
+      setTVSeries(data);
+    } catch (error) {
+      console.error("Error fetching TV series:", error.message);
+    }
+  };
+
   useEffect(() => {
-    const fetchTVSeries = async () => {
-      try {
-        const { data } = await axios.get(`${API_BASE_URL}/tvseries`); 
-        setTVSeries(data);
-      } catch (error) {
-        console.error("Error fetching TV series:", error.message);
-      }
-    };
     fetchTVSeries();
   }, []);
 
@@ -35,6 +36,14 @@ const TVseries = ({ searchQuery }) => {
     } catch (error) {
       console.error("Error toggling bookmark:", error.message);
     }
+  };
+
+  const handleMouseOver = (e, isBookmarked) => {
+    e.currentTarget.src = isBookmarked ? bookmarkC : bookmarkH;
+  };
+
+  const handleMouseOut = (e, isBookmarked) => {
+    e.currentTarget.src = isBookmarked ? bookmarkC : bookmark;
   };
 
   const filteredTVSeries = tvSeries.filter((series) =>
@@ -82,10 +91,8 @@ const TVseries = ({ searchQuery }) => {
               <img
                 src={series.isBookmarked ? bookmarkC : bookmark}
                 alt="Bookmark"
-                onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
-                onMouseOut={(e) =>
-                  (e.currentTarget.src = series.isBookmarked ? bookmarkC : bookmark)
-                }
+                onMouseOver={(e) => handleMouseOver(e, series.isBookmarked)}
+                onMouseOut={(e) => handleMouseOut(e, series.isBookmarked)}
               />
             </div>
           </div>

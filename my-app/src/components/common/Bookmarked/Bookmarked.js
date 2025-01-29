@@ -25,6 +25,54 @@ const toggleBookmark = async (id, setItems) => {
   }
 };
 
+const renderThumbnail = (item) => (
+  <div className="thumbnail-container">
+    <img
+      src={item.thumbnailUrl.regularLarge}
+      alt={item.title}
+      className="movie-thumbnail"
+    />
+    <div className="play-button">
+      <img src={playIcon} alt="Play" />
+      <span>Play</span>
+    </div>
+  </div>
+);
+
+const renderItemInfo = (item) => (
+  <div className="movie-info">
+    <p>
+      {item.year} •{" "}
+      <span className="category">
+        <img
+          src={item.category === "Movie" ? movieIcon : tvIcon}
+          alt={item.category}
+          className="category-icon"
+        />{" "}
+        {item.category}
+      </span>{" "}
+      • {item.rating}
+    </p>
+    <h3>{item.title}</h3>
+  </div>
+);
+
+const renderBookmarkIcon = (item, toggleBookmark) => (
+  <div
+    className="bookmark-icon"
+    onClick={() => toggleBookmark(item._id)}
+  >
+    <img
+      src={item.isBookmarked ? bookmarkC : bookmark}
+      alt="Bookmark"
+      onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
+      onMouseOut={(e) =>
+        (e.currentTarget.src = item.isBookmarked ? bookmarkC : bookmark)
+      }
+    />
+  </div>
+);
+
 const renderItems = (items, setItems, searchQuery, category) => {
   const filteredItems = items.filter((item) =>
     item.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -33,55 +81,19 @@ const renderItems = (items, setItems, searchQuery, category) => {
   return (
     <div>
       {!searchQuery && (
-        <h2 className="bookmarked-page bookmarked-header">{`Bookmarked ${category}`}</h2>
+        <h2 className="bookmarked-header">{`Bookmarked ${category}`}</h2>
       )}
       {searchQuery && (
         <p className="search-results-text">
           Found {filteredItems.length} results for '{searchQuery}'
         </p>
       )}
-      <div className="bookmarked-page movie-list">
+      <div className="movie-list">
         {filteredItems.map((item) => (
-          <div key={item._id} className="bookmarked-page movie-item">
-            <div className="thumbnail-container">
-              <img
-                src={item.thumbnailUrl.regularLarge}
-                alt={item.title}
-                className="bookmarked-page movie-thumbnail"
-              />
-              <div className="play-button">
-                <img src={playIcon} alt="Play" />
-                <span>Play</span>
-              </div>
-            </div>
-            <div className="bookmarked-page movie-info">
-              <p>
-                {item.year} •{" "}
-                <span className="bookmarked-page category">
-                  <img
-                    src={item.category === "Movie" ? movieIcon : tvIcon}
-                    alt={item.category}
-                    className="bookmarked-page category-icon"
-                  />{" "}
-                  {item.category}
-                </span>{" "}
-                • {item.rating}
-              </p>
-              <h3>{item.title}</h3>
-            </div>
-            <div
-              className="bookmarked-page bookmark-icon"
-              onClick={() => toggleBookmark(item._id, setItems)}
-            >
-              <img
-                src={item.isBookmarked ? bookmarkC : bookmark}
-                alt="Bookmark"
-                onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
-                onMouseOut={(e) =>
-                  (e.currentTarget.src = item.isBookmarked ? bookmarkC : bookmark)
-                }
-              />
-            </div>
+          <div key={item._id} className="movie-item">
+            {renderThumbnail(item)}
+            {renderItemInfo(item)}
+            {renderBookmarkIcon(item, toggleBookmark)}
           </div>
         ))}
       </div>

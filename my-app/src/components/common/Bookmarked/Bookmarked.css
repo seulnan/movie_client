@@ -9,12 +9,12 @@
 }
 
 /* 공통 스타일 */
-.bookmarked-page .movie-list {
+.movie-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 최소 크기를 280px로 업데이트 */
 }
 
-.bookmarked-page .movie-item {
+.movie-item {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -23,11 +23,11 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.bookmarked-page .movie-item:hover {
+.movie-item:hover {
   transform: scale(1.05);
 }
 
-.bookmarked-page .thumbnail-container {
+.thumbnail-container {
   width: 280px; /* 이미지 너비 */
   height: 174px; /* 이미지 높이 */
   object-fit: cover;
@@ -35,7 +35,7 @@
   position: relative;
 }
 
-.bookmarked-page .thumbnail-container::before {
+.thumbnail-container::before {
   content: "";
   position: absolute;
   top: 0;
@@ -47,12 +47,12 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.bookmarked-page .thumbnail-container:hover::before {
+.thumbnail-container:hover::before {
   opacity: 1;
 }
 
 /* Play 버튼 스타일 */
-.bookmarked-page .thumbnail-container .play-button {
+.thumbnail-container .play-button {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -71,24 +71,24 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.bookmarked-page .thumbnail-container:hover .play-button {
+.thumbnail-container:hover .play-button {
   opacity: 1;
 }
 
-.bookmarked-page .movie-info {
+.movie-info {
   padding: 10px;
   background: none;
   color: #ffffff;
   font-size: 14px;
 }
 
-.bookmarked-page .movie-info p {
+.movie-info p {
   margin: 0;
   font-weight: 300;
   opacity: 0.8;
 }
 
-.bookmarked-page .bookmark-icon {
+.bookmark-icon {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -96,17 +96,17 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.bookmarked-page .bookmark-icon:hover {
+.bookmark-icon:hover {
   transform: scale(1.2);
 }
 
 /* Movies 섹션 스타일 */
-.bookmarked-page .bookmarked-movies-list .movie-item {
+.bookmarked-movies-list .movie-item {
   background-color: #1e1e1e;
 }
 
 /* TV Series 섹션 스타일 */
-.bookmarked-page .bookmarked-tvseries-list .movie-item {
+.bookmarked-tvseries-list .movie-item {
   background-color: #2e2e2e;
 }
 
@@ -124,21 +124,21 @@
     margin-bottom: 15px;
   }
 
-  .bookmarked-page .movie-list {
+  .movie-list {
     grid-template-columns: repeat(2, 1fr); /* 모바일에서 2개씩 정렬 */
     gap: 10px;
   }
 
-  .bookmarked-page .thumbnail-container {
+  .thumbnail-container {
     width: 100%; /* 모바일에서도 유연한 크기 */
     height: auto;
   }
 
-  .bookmarked-page .movie-info {
+  .movie-info {
     font-size: 12px;
   }
 
-  .bookmarked-page .bookmark-icon {
+  .bookmark-icon {
     top: 5px;
     right: 5px;
   }
@@ -150,20 +150,20 @@
     font-size: 25px;
   }
 
-  .bookmarked-page .movie-list {
+  .movie-list {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .bookmarked-page .thumbnail-container {
+  .thumbnail-container {
     width: 100%; /* 고정 너비 */
     height: 174px; /* 고정 높이 */
   }
 
-  .bookmarked-page .movie-info {
+  .movie-info {
     font-size: 16px;
   }
 
-  .bookmarked-page .bookmark-icon {
+  .bookmark-icon {
     top: 10px;
     right: 10px;
   }
