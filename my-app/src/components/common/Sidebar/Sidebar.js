@@ -17,20 +17,19 @@ const Sidebar = () => {
   const [lastScrollY, setLastScrollY] = useState(0); // 마지막 스크롤 위치
   const [activeIcon, setActiveIcon] = useState(""); // 현재 클릭된 아이콘 상태
 
+  // 스크롤 이벤트로 Sidebar 숨기기 / 보이기 처리
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
-        // 아래로 스크롤 중이면 Sidebar 숨기기
-        setIsHidden(true);
+        setIsHidden(true); // 아래로 스크롤 시 숨기기
       } else {
-        // 위로 스크롤 중이면 Sidebar 보이기
-        setIsHidden(false);
+        setIsHidden(false); // 위로 스크롤 시 보이기
       }
       setLastScrollY(window.scrollY); // 현재 스크롤 위치 업데이트
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll); // 이벤트 제거
+    return () => window.removeEventListener("scroll", handleScroll); // 이벤트 정리
   }, [lastScrollY]);
 
   const menuItems = [
@@ -39,6 +38,14 @@ const Sidebar = () => {
     { name: "tv", default: TVIcon, hover: TVHoverIcon, path: "/tvseries" },
     { name: "bookmark", default: BookmarkIcon, hover: BookmarkHoverIcon, path: "/bookmarked" },
   ];
+
+  const handleMouseEnter = (name) => {
+    setActiveIcon((prev) => (prev !== name ? `${name}-hover` : prev));
+  };
+
+  const handleMouseLeave = (name) => {
+    setActiveIcon((prev) => (prev !== name ? "" : prev));
+  };
 
   return (
     <div className={`sidebar ${isHidden ? "hidden" : ""}`}>
@@ -50,20 +57,12 @@ const Sidebar = () => {
           key={item.name}
           to={item.path}
           className="icon"
-          onMouseEnter={() => {
-            if (activeIcon !== item.name) setActiveIcon(item.name + "-hover");
-          }}
-          onMouseLeave={() => {
-            if (activeIcon !== item.name) setActiveIcon("");
-          }}
+          onMouseEnter={() => handleMouseEnter(item.name)}
+          onMouseLeave={() => handleMouseLeave(item.name)}
           onClick={() => setActiveIcon(item.name)}
         >
           <img
-            src={
-              activeIcon === item.name || activeIcon === item.name + "-hover"
-                ? item.hover
-                : item.default
-            }
+            src={activeIcon === item.name || activeIcon === `${item.name}-hover` ? item.hover : item.default}
             alt={`${item.name} Icon`}
           />
         </NavLink>
