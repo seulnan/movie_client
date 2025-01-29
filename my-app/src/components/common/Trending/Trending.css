@@ -40,6 +40,10 @@
   transition: transform 0.3s ease;
 }
 
+.card:hover {
+  transform: scale(1.05);
+}
+
 .card-image-container {
   position: relative;
   height: 100%;
@@ -78,6 +82,11 @@
   border-radius: 28.5px;
   width: 117px;
   height: 48px;
+  transition: background 0.3s ease;
+}
+
+.play-button:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .play-button img {
@@ -87,7 +96,7 @@
 
 .play-button span {
   font-size: 18px;
-  color: #FFF;
+  color: #fff;
   margin-left: 10px;
 }
 
@@ -110,11 +119,6 @@
   margin: 0;
   font-size: 18px;
   font-weight: bold;
-}
-
-.category-icon {
-  width: 13px;
-  height: 13px;
 }
 
 .bookmark-icon {
