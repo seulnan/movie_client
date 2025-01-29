@@ -4,8 +4,10 @@ import bookmark from "../../../assets/bookmark.svg";
 import bookmarkH from "../../../assets/bookmarkH.svg";
 import bookmarkC from "../../../assets/bookmarkC.svg";
 import tvIcon from "../../../assets/tv2.svg";
-import playIcon from "../../../assets/play.svg"; // Play 아이콘 추가
+import playIcon from "../../../assets/play.svg";
 import "./TVseries.css";
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const TVseries = ({ searchQuery }) => {
   const [tvSeries, setTVSeries] = useState([]);
@@ -13,7 +15,7 @@ const TVseries = ({ searchQuery }) => {
   useEffect(() => {
     const fetchTVSeries = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5001/api/works/tvseries");
+        const { data } = await axios.get(`${API_BASE_URL}/tvseries`); 
         setTVSeries(data);
       } catch (error) {
         console.error("Error fetching TV series:", error.message);
@@ -24,7 +26,7 @@ const TVseries = ({ searchQuery }) => {
 
   const toggleBookmark = async (id) => {
     try {
-      const { data } = await axios.patch(`http://localhost:5001/api/works/${id}/bookmark`);
+      const { data } = await axios.patch(`${API_BASE_URL}/${id}/bookmark`);
       setTVSeries((prev) =>
         prev.map((item) =>
           item._id === id ? { ...item, isBookmarked: data.isBookmarked } : item
