@@ -8,13 +8,15 @@ import tvIcon from "../../../assets/tv2.svg";
 import playIcon from "../../../assets/play.svg"; // Play 아이콘 추가
 import "./Recommended.css";
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const Recommended = ({ searchQuery }) => {
   const [recommendedMovies, setRecommendedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchRecommendedMovies = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:5001/api/works/recommend");
+      const response = await axios.get(`${API_BASE_URL}/recommend`);
       setRecommendedMovies(response.data);
     } catch (error) {
       console.error("Error fetching recommended movies:", error.message);
@@ -27,23 +29,20 @@ const Recommended = ({ searchQuery }) => {
     fetchRecommendedMovies();
   }, [fetchRecommendedMovies]);
 
-  const toggleBookmark = useCallback(
-    async (id) => {
-      try {
-        const response = await axios.patch(`http://localhost:5001/api/works/${id}/bookmark`);
-        const updatedBookmark = response.data.isBookmarked;
+  const toggleBookmark = useCallback(async (id) => {
+    try {
+      const response = await axios.patch(`${API_BASE_URL}/${id}/bookmark`);
+      const updatedBookmark = response.data.isBookmarked;
 
-        setRecommendedMovies((prevMovies) =>
-          prevMovies.map((movie) =>
-            movie._id === id ? { ...movie, isBookmarked: updatedBookmark } : movie
-          )
-        );
-      } catch (error) {
-        console.error("Error toggling bookmark:", error.message);
-      }
-    },
-    []
-  );
+      setRecommendedMovies((prevMovies) =>
+        prevMovies.map((movie) =>
+          movie._id === id ? { ...movie, isBookmarked: updatedBookmark } : movie
+        )
+      );
+    } catch (error) {
+      console.error("Error toggling bookmark:", error.message);
+    }
+  }, []);
 
   const filteredMovies = recommendedMovies.filter((movie) =>
     movie.title.toLowerCase().includes(searchQuery.toLowerCase())

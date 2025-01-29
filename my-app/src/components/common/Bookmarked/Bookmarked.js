@@ -5,14 +5,14 @@ import bookmarkH from "../../../assets/bookmarkH.svg";
 import bookmarkC from "../../../assets/bookmarkC.svg";
 import movieIcon from "../../../assets/movie2.svg";
 import tvIcon from "../../../assets/tv2.svg";
-import playIcon from "../../../assets/play.svg"; // Add play icon if not already imported
+import playIcon from "../../../assets/play.svg";
 import "./Bookmarked.css";
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const toggleBookmark = async (id, setItems) => {
   try {
-    const response = await axios.patch(
-      `http://localhost:5001/api/works/${id}/bookmark`
-    );
+    const response = await axios.patch(`${API_BASE_URL}/${id}/bookmark`);
     const updatedBookmark = response.data.isBookmarked;
 
     setItems((prev) =>
@@ -96,14 +96,9 @@ const Bookmarked = ({ searchQuery }) => {
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5001/api/works/bookmarks"
-        );
-
+        const response = await axios.get(`${API_BASE_URL}/bookmarks`);
         const movies = response.data.filter((item) => item.category === "Movie");
-        const tvSeries = response.data.filter(
-          (item) => item.category === "TV Series"
-        );
+        const tvSeries = response.data.filter((item) => item.category === "TV Series");
 
         setBookmarkedMovies(movies);
         setBookmarkedTVSeries(tvSeries);

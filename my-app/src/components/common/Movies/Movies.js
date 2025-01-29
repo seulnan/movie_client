@@ -7,13 +7,15 @@ import movieIcon from "../../../assets/movie2.svg";
 import playIcon from "../../../assets/play.svg"; // Play 아이콘 추가
 import "./Movies.css";
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const Movies = ({ searchQuery }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/works/movies");
+        const response = await axios.get(`${API_BASE_URL}/movies`);
         setMovies(response.data);
       } catch (error) {
         console.error("Error fetching movies:", error.message);
@@ -25,7 +27,7 @@ const Movies = ({ searchQuery }) => {
 
   const toggleBookmark = async (id) => {
     try {
-      const response = await axios.patch(`http://localhost:5001/api/works/${id}/bookmark`);
+      const response = await axios.patch(`${API_BASE_URL}/${id}/bookmark`);
       const updatedBookmark = response.data.isBookmarked;
 
       setMovies((prev) =>
