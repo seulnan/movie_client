@@ -1,92 +1,76 @@
-  .movies h2 {
-    color: #fff; /* 제목 색상 */
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.5px;
+.movies {
+  color: #fff;
+}
 
-  }
-  
-  .movie-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 열을 4개로 설정 */
-    grid-template-rows: repeat(6, auto); /* 행을 6개로 설정 */
-    gap: 20px; /* 카드 간 간격 */
-  }
-  
-  .movie-item {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .movie-thumbnail {
-    width: 100%;
-    height: 174px;
-  }
-  
-  .movie-info {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .movie-info p,
-  .movie-info h3 {
-    margin: 0;
-    color: #fff;
-    font-size: 14px;
-  }
-  
-  .movie-info p {
-    font-weight: 300;
-    opacity: 0.8;
-  }
+.movies-header {
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+}
 
-  .category-icon {
-    width: 13px; /* 아이콘의 너비 */
-    height: 13px; /* 아이콘의 높이 */
-    margin-right: 4px; /* 아이콘과 텍스트 간의 간격 */
-  }  
-  
-  .bookmark-icon img {
-    width: 25px;
-    height: 25px;
-  }
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
 
-  .search-results {
-    font-family: "Outfit", sans-serif;
-    font-size: 25px;
-    margin-bottom: 20px;
-    color: #fff;
-  }  
-  
-  /* 미디어 쿼리 - 모바일 */
+.movie-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.movie-thumbnail {
+  width: 100%;
+  height: 174px;
+}
+
+.movie-info {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.movie-info p,
+.movie-info h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.movie-info p {
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.category-icon {
+  width: 13px;
+  height: 13px;
+  margin-right: 4px;
+}
+
+.bookmark-icon img {
+  width: 25px;
+  height: 25px;
+}
+
+.search-results {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
 @media (max-width: 768px) {
-  .movies-page .content {
-    padding: 20px;
-    gap: 30px;
-  }
-
-  .movies-page .movie-list {
+  .movie-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 }
 
-/* 미디어 쿼리 - 데스크탑 */
 @media (min-width: 1200px) {
-  .movies-page .content {
-    padding: 50px;
-    gap: 70px;
-  }
-
-  .movies-page .movie-list {
+  .movie-list {
     grid-template-columns: repeat(4, 1fr);
   }
 }

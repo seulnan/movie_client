@@ -4,7 +4,7 @@ import bookmark from "../../../assets/bookmark.svg";
 import bookmarkH from "../../../assets/bookmarkH.svg";
 import bookmarkC from "../../../assets/bookmarkC.svg";
 import movieIcon from "../../../assets/movie2.svg";
-import playIcon from "../../../assets/play.svg"; // Play 아이콘 추가
+import playIcon from "../../../assets/play.svg";
 import "./Movies.css";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -13,26 +13,24 @@ const Movies = ({ searchQuery }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/movies`);
-        setMovies(response.data);
-      } catch (error) {
-        console.error("Error fetching movies:", error.message);
-      }
-    };
-
     fetchMovies();
   }, []);
 
+  const fetchMovies = async () => {
+    try {
+      const { data } = await axios.get(`${API_BASE_URL}/movies`);
+      setMovies(data);
+    } catch (error) {
+      console.error("Error fetching movies:", error.message);
+    }
+  };
+
   const toggleBookmark = async (id) => {
     try {
-      const response = await axios.patch(`${API_BASE_URL}/${id}/bookmark`);
-      const updatedBookmark = response.data.isBookmarked;
-
+      const { data } = await axios.patch(`${API_BASE_URL}/${id}/bookmark`);
       setMovies((prev) =>
-        prev.map((item) =>
-          item._id === id ? { ...item, isBookmarked: updatedBookmark } : item
+        prev.map((movie) =>
+          movie._id === id ? { ...movie, isBookmarked: data.isBookmarked } : movie
         )
       );
     } catch (error) {
@@ -45,7 +43,7 @@ const Movies = ({ searchQuery }) => {
   );
 
   return (
-    <div className="movies movies-page">
+    <div className="movies">
       {searchQuery ? (
         <p className="search-results">
           Found {filteredMovies.length} result{filteredMovies.length !== 1 ? "s" : ""} for '{searchQuery}'
@@ -53,15 +51,11 @@ const Movies = ({ searchQuery }) => {
       ) : (
         <h2 className="movies-header">Movies</h2>
       )}
-      <div className="movie-list movies-list">
-        {filteredMovies.map((movie) => (
-          <div key={movie._id} className="movie-item movies-item">
+      <div className="movie-list">
+        {filteredMovies.map(({ _id, title, year, rating, thumbnailUrl, isBookmarked }) => (
+          <div key={_id} className="movie-item">
             <div className="movie-thumbnail-container">
-              <img
-                src={movie.thumbnailUrl.regularLarge}
-                alt={movie.title}
-                className="movie-thumbnail movies-thumbnail"
-              />
+              <img src={thumbnailUrl.regularLarge} alt={title} className="movie-thumbnail" />
               <div className="hover-overlay">
                 <div className="play-button">
                   <img src={playIcon} alt="Play" />
@@ -69,28 +63,21 @@ const Movies = ({ searchQuery }) => {
                 </div>
               </div>
             </div>
-            <div className="movie-info movies-info">
+            <div className="movie-info">
               <p>
-                {movie.year} •{" "}
-                <span className="category">
+                {year} • <span className="category">
                   <img src={movieIcon} alt="Movie" className="category-icon" /> Movie
-                </span>{" "}
-                • {movie.rating}
+                </span> • {rating}
               </p>
-              <h3>{movie.title}</h3>
+              <h3>{title}</h3>
             </div>
             <div
-              className="bookmark-icon movies-bookmark-icon"
-              onClick={() => toggleBookmark(movie._id)}
+              className="bookmark-icon"
+              onClick={() => toggleBookmark(_id)}
+              onMouseOver={(e) => (e.currentTarget.firstChild.src = bookmarkH)}
+              onMouseOut={(e) => (e.currentTarget.firstChild.src = isBookmarked ? bookmarkC : bookmark)}
             >
-              <img
-                src={movie.isBookmarked ? bookmarkC : bookmark}
-                alt="Bookmark"
-                onMouseOver={(e) => (e.currentTarget.src = bookmarkH)}
-                onMouseOut={(e) =>
-                  (e.currentTarget.src = movie.isBookmarked ? bookmarkC : bookmark)
-                }
-              />
+              <img src={isBookmarked ? bookmarkC : bookmark} alt="Bookmark" />
             </div>
           </div>
         ))}
