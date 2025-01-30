@@ -107,6 +107,7 @@ const Recommended = ({ searchQuery }) => {
           Found {filteredMovies.length} result{filteredMovies.length !== 1 ? "s" : ""} for '{searchQuery}'
         </p>
       )}
+      <h2 className="recommended-title">Recommended for you</h2>
       <div className="movie-list recommended-list">
         {filteredMovies.map((movie) => (
           <MovieItem key={movie._id} movie={movie} onToggleBookmark={toggleBookmark} />
